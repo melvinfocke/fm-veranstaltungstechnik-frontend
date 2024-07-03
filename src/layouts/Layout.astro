@@ -1,0 +1,118 @@
+---
+import '@fontsource/big-shoulders-inline-text/900.css';
+import '@fontsource/open-sans/600.css';
+
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+
+const titlePrefix = title ? `${title} – ` : '';
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
+    <link rel="icon" type="image/png" href="/favicon-64x64.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="designer" content="Anna Riemer" />
+    <meta name="developer" content="Melvin Focke" />
+    <title>{titlePrefix + 'FM Veranstaltungstechnik'}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <Nav />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+<style is:global>
+  :root {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    scroll-padding-top: 3rem;
+
+    --max-width: 63rem;
+    --section-padding: 1.5rem;
+    --content-border: 1.5rem;
+    --color-black: #000000;
+    --color-black-transparent: #00000000;
+    --color-white: #ffffff;
+    --color-white-100: #ffffffbf;
+    --color-blue-700: #4b4f6c1a;
+    --color-blue-800: #4b4f6cc7;
+    --color-blue-900: #000736;
+    --color-gray-100: #fdfdfd;
+    --color-gray-700: #83838346;
+    --color-gray-900: #121421;
+  }
+
+  @media screen and (max-width: 557px) {
+    :root {
+      font-size: 93.75%;
+    }
+  }
+
+  body {
+    background: var(--color-black);
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  main {
+    width: 100%;
+  }
+
+  body,
+  button {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.35;
+    color: var(--color-white);
+    font-size: 1.125rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Big Shoulders Inline Text', sans-serif;
+    line-height: 1.2;
+    letter-spacing: 0.05rem;
+    text-transform: uppercase;
+    margin: 0;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  /*section {
+    padding-inline: var(--section-padding);
+  }*/
+</style>

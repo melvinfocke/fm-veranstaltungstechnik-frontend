@@ -1,0 +1,79 @@
+---
+import { Image } from 'astro:assets';
+
+import backgroundImage from '../assets/cool-background.jpg';
+---
+
+<section>
+  <h2>Social Proof</h2>
+  <Image src={backgroundImage} alt="Cool Background" class="background-image" />
+  <div class="content-wrapper">
+    <slot />
+  </div>
+</section>
+
+<style>
+  section {
+    max-width: calc(var(--max-width) + var(--content-border) * 2);
+    width: 100%;
+    margin-inline: auto;
+    position: relative;
+    /*outline: 1px solid red;*/
+  }
+
+  section::before,
+  section::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 4rem;
+    left: 0;
+    z-index: 1;
+  }
+
+  section::before {
+    top: 0;
+    background: linear-gradient(var(--color-black), var(--color-black-transparent));
+  }
+
+  section::after {
+    bottom: 0;
+    background: linear-gradient(var(--color-black-transparent), var(--color-black));
+  }
+
+  .background-image {
+    width: 100%;
+    object-fit: cover;
+    filter: brightness(0.75);
+    display: block;
+    height: 80rem;
+  }
+
+  h2 {
+    font-size: 0;
+  }
+
+  .content-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    position: absolute;
+    flex-wrap: wrap;
+    width: calc(100% - var(--content-border) * 2);
+    top: 50%;
+    transform: translateY(-50%);
+    padding-inline: var(--content-border);
+  }
+
+  @media (min-width: 729px) {
+    .background-image {
+      height: 55rem;
+    }
+  }
+
+  @media (min-width: 1073px) {
+    .background-image {
+      height: 33rem;
+    }
+  }
+</style>

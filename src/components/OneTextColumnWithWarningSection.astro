@@ -1,0 +1,157 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  title: string;
+  text: string;
+  warningTitle: string;
+  warningText: string;
+  warningSource: ImageMetadata;
+  warningAlt: string;
+}
+
+const { title, text, warningTitle, warningText, warningSource, warningAlt } = Astro.props;
+---
+
+<section>
+  <div class="text-column">
+    <h2 set:html={title} />
+    <p set:html={text} />
+  </div>
+  <div class="warning-column">
+    <Image src={warningSource} alt={warningAlt} />
+    <div>
+      <h2 set:html={warningTitle} />
+      <p set:html={warningText} />
+    </div>
+  </div>
+</section>
+
+<style>
+  section {
+    max-width: calc(var(--max-width) + var(--content-border) * 2);
+    width: 100%;
+    margin-inline: auto;
+    /*outline: 1px solid red;*/
+    background: radial-gradient(var(--color-blue-900), var(--color-black));
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .text-column,
+  .warning-column {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .text-column {
+    padding-block: 4rem 0;
+  }
+
+  .warning-column {
+    padding-block: 0;
+  }
+
+  .text-column > * {
+    margin-inline: var(--content-border);
+  }
+
+  .text-column h2 {
+    padding-bottom: 2rem;
+  }
+
+  .warning-column {
+    position: relative;
+  }
+
+  .warning-column > * {
+    margin-inline: var(--content-border);
+  }
+
+  .warning-column img {
+    width: calc(100% - var(--content-border) * 2 - 5rem);
+    height: auto;
+    padding: 150% 2.5rem;
+  }
+
+  .warning-column div {
+    position: absolute;
+    top: calc(50%);
+    transform: translateY(-50%);
+    background: var(--color-white-100);
+    width: calc(100% - 2.5rem - var(--content-border) * 2);
+    border-radius: 1rem;
+    color: var(--color-black);
+    padding: 1.1875rem 1.25rem;
+    text-align: center;
+  }
+
+  .warning-column h2 {
+    font-family: inherit;
+    padding-bottom: 2rem;
+    font-size: 1.5em;
+  }
+
+  @media (min-width: 300px) {
+    .warning-column img {
+      padding: 10.5rem 2.5rem;
+    }
+  }
+
+  @media (min-width: 350px) {
+    .warning-column img {
+      padding: 7.5rem 2.5rem;
+    }
+  }
+
+  @media (min-width: 400px) {
+    .warning-column img {
+      padding: 4rem 2.5rem;
+    }
+  }
+
+  @media (min-width: 450px) {
+    .warning-column img {
+      padding: 1.5rem 2.5rem;
+    }
+  }
+
+  @media (min-width: 500px) {
+    .warning-column img {
+      padding: 0 2.5rem;
+    }
+  }
+
+  @media (min-width: 700px) {
+    section {
+      flex-wrap: nowrap;
+    }
+
+    .text-column,
+    .warning-column {
+      width: 50%;
+      padding-block: 2rem;
+    }
+
+    .text-column > * {
+      margin-left: var(--content-border);
+    }
+
+    .warning-column > * {
+      margin-right: var(--content-border);
+    }
+
+    .warning-column div {
+      width: calc(100% - 2.5rem - var(--content-border) * 2);
+      top: calc(50% + 2rem);
+    }
+
+    .warning-column img {
+      width: calc(100% - var(--content-border) * 2 - 5rem);
+      padding: 4rem 2.5rem 0;
+    }
+  }
+</style>

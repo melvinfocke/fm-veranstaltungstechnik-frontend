@@ -1,0 +1,21 @@
+{
+  "name": "",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev --host 0.0.0.0",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.7.0",
+    "@astrojs/sitemap": "^3.1.6",
+    "@fontsource/big-shoulders-inline-text": "^5.0.20",
+    "@fontsource/open-sans": "^5.0.28",
+    "astro": "^4.11.0",
+    "astro-robots-txt": "^1.0.0",
+    "typescript": "^5.4.5"
+  }
+}

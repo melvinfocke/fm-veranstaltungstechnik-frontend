@@ -1,0 +1,73 @@
+---
+import Hero from '../components/Hero.astro';
+import Layout from '../layouts/Layout.astro';
+import Gallery from '../components/Gallery.astro';
+import OneTextColumnWithWarningSection from '../components/OneTextColumnWithWarningSection.astro';
+import Contact from '../components/Contact.astro';
+
+import { addressCondesed } from '../env';
+
+import heroImage from '../assets/hero.png';
+
+import galleryImage1 from '../assets/lasershow-galerie-01.jpg';
+import galleryImage2 from '../assets/lasershow-galerie-02.jpg';
+import galleryImage3 from '../assets/lasershow-galerie-03.jpg';
+import galleryImage4 from '../assets/lasershow-galerie-04.jpg';
+import galleryImage5 from '../assets/lasershow-galerie-05.jpg';
+import galleryImage6 from '../assets/lasershow-galerie-06.jpg';
+import galleryImage7 from '../assets/lasershow-galerie-07.jpg';
+import galleryImage8 from '../assets/lasershow-galerie-08.jpg';
+
+import warningIcon from '../assets/warning-icon.png';
+
+import contactLocationIcon from '../assets/location-icon.png';
+import contactPhoneIcon from '../assets/phone-icon.png';
+import contactMailIcon from '../assets/mail-icon.png';
+---
+
+<Layout
+  title="Lasershow"
+  description="Unsere Lasershow ist ein Highlight für jede Veranstaltung. Wir bieten verschiedene Lasershows für jeden Anlass an. Ob Hochzeit, Geburtstag oder Firmenfeier, wir haben das passende Angebot für euch."
+>
+  <Hero
+    headline="Lasershow"
+    imageSource={heroImage}
+    body={`Unsere Lasershow ist ein Highlight für jede Veranstaltung. Wir bieten verschiedene Lasershows für jeden
+        Anlass an. Ob Hochzeit, Geburtstag oder Firmenfeier, wir haben das passende Angebot für euch.`}
+  />
+  <Gallery
+    sources={[
+      galleryImage1,
+      galleryImage2,
+      galleryImage3,
+      galleryImage4,
+      galleryImage5,
+      galleryImage6,
+      galleryImage7,
+      galleryImage8
+    ]}
+  />
+  <OneTextColumnWithWarningSection
+    title="Unsere Lasershow"
+    text={`Unsere Laser können als eigenständige Show oder als Begleitung zu unserem Musik- und DJ-Angebot dazugebucht
+        werden.<br /><br />Wir bieten die Möglichkeit, einen eigenen Song auszuwählen, zu dem wir eine entsprechende
+        Lasershow vorbereiten. Dies sollte jedoch etwa zwei Monate im Voraus mit uns abgesprochen werden.<br /><br />
+        Unsere Shows finden ausschließlich abends statt, da sie im Dunkeln am besten zur Geltung kommen.<br /><br />
+        Lasershows sind sowohl drinnen als auch draußen möglich.`}
+    warningTitle="Achtung!"
+    warningText={`Die Lasershow ist nicht für Personen mit Epilepsie geeignet. Bitte beachtet, dass die Show Lichtblitze
+        und schnelle Bewegungen enthält.<br /><br />Direktes oder bewusstes Hineinschauen in den Lichtpunkt des Lasers
+        oder direkter Augenkontakt kann zu Verletzungen der Netzhaut führen.`}
+    warningSource={warningIcon}
+    warningAlt="Lasershow"
+  />
+  <Contact
+    locationIconSource={contactLocationIcon}
+    locationIconAlt="Location Icon"
+    phoneIconSource={contactPhoneIcon}
+    phoneIconAlt="Phone Icon"
+    mailIconSource={contactMailIcon}
+    mailIconAlt="Mail Icon"
+    address={addressCondesed}
+  />
+</Layout>

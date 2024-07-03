@@ -1,0 +1,35 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  iconSource: ImageMetadata;
+  iconAlt: string;
+  text: string;
+}
+
+const { iconSource, iconAlt, text } = Astro.props;
+---
+
+<div>
+  <Image src={iconSource} alt={iconAlt} />
+  <div>
+    <p set:html={text} />
+  </div>
+</div>
+
+<style>
+  div {
+    width: 14.625rem;
+    /*outline: 1px solid blue;*/
+  }
+
+  img {
+    filter: invert(1);
+    height: 5rem;
+    width: 5rem;
+  }
+
+  p {
+    margin-top: 0.5rem;
+  }
+</style>

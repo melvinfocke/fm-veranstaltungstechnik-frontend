@@ -1,0 +1,174 @@
+---
+import { Image } from 'astro:assets';
+
+import ContactForm from './ContactForm.astro';
+import RedactedMailLink from './RedactedMailLink.astro';
+import RedactedPhoneLink from './RedactedPhoneLink.astro';
+
+interface Props {
+  locationIconSource: ImageMetadata;
+  locationIconAlt: string;
+  phoneIconSource: ImageMetadata;
+  phoneIconAlt: string;
+  mailIconSource: ImageMetadata;
+  mailIconAlt: string;
+  address: string;
+}
+
+const { locationIconSource, locationIconAlt, phoneIconSource, phoneIconAlt, mailIconSource, mailIconAlt, address } =
+  Astro.props;
+---
+
+<section id="kontakt">
+  <div class="contact-form-container">
+    <h2>Kontaktformular</h2>
+    <ContactForm />
+  </div>
+  <div class="contact-info-container">
+    <div>
+      <div class="contact-info-item">
+        <Image src={locationIconSource} alt={locationIconAlt} />
+        <p set:html={address} />
+      </div>
+      <div class="contact-info-item">
+        <Image src={phoneIconSource} alt={phoneIconAlt} />
+        <RedactedPhoneLink />
+      </div>
+      <div class="contact-info-item">
+        <Image src={mailIconSource} alt={mailIconAlt} />
+        <RedactedMailLink />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  section {
+    max-width: calc(var(--max-width) + var(--content-border) * 2);
+    width: 100%;
+    margin-inline: auto;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    /*outline: 1px solid red;*/
+    overflow: hidden;
+    /*background: radial-gradient(var(--color-blue-900), var(--color-black));
+    z-index: -1;*/
+  }
+
+  section > div {
+    width: 25.375rem;
+    /*outline: 1px solid blue;*/
+  }
+
+  .contact-form-container {
+    margin-bottom: 2rem;
+    margin-left: var(--content-border);
+  }
+
+  h2 {
+    padding-block: 3rem 1rem;
+  }
+
+  .contact-info-container {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    color: var(--color-black);
+    margin-right: var(--content-border);
+  }
+
+  .contact-info-container::before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    width: calc(var(--max-width) * 0.9);
+    height: calc(var(--max-width) * 0.9);
+    border-radius: 50%;
+    right: calc(-41.66% + 2 * var(--content-border));
+    background: var(--color-white);
+    /*background: radial-gradient(var(--color-gray-100), var(--color-blue-700));*/
+    z-index: -1;
+  }
+
+  .contact-info-container > div {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .contact-info-item {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+    transition: opacity 0.1s ease-in-out;
+  }
+
+  a:hover {
+    opacity: 0.5;
+  }
+
+  img {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  @media screen and (max-width: 1072px) {
+    .contact-info-container::before {
+      width: 100%;
+      height: 135%;
+      right: calc(-50% - var(--content-border));
+    }
+  }
+
+  @media screen and (max-width: 920px) {
+    section {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .contact-form-container {
+      margin-left: 0;
+      padding-bottom: 2rem;
+    }
+
+    .contact-info-container {
+      margin-right: 0;
+      justify-content: left;
+    }
+
+    .contact-info-container::before {
+      width: 115rem;
+      height: 30rem;
+      right: initial;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: calc(-15rem + 2rem + 2rem);
+    }
+
+    .contact-info-container > div {
+      margin-block: 2rem 2rem;
+    }
+  }
+
+  @media screen and (max-width: 440px) {
+    section > div {
+      width: calc(100% - var(--content-border) * 2);
+    }
+  }
+
+  @media screen and (max-width: 395px) {
+    .contact-info-container::before {
+      bottom: calc(-15rem + 4rem + 2rem);
+    }
+
+    .contact-info-container > div {
+      margin-block: 4rem 2rem;
+    }
+  }
+</style>

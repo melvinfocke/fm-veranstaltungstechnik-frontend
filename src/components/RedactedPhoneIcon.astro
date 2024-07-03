@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  icon: ImageMetadata;
+  alt: string;
+}
+
+const { icon, alt } = Astro.props;
+---
+
+<a class="p-i" aria-label="Anrufen"><Image src={icon} alt={alt} /></a>
+<style>
+  a {
+    display: inline-block;
+    position: relative;
+    height: auto;
+    padding: 0.5rem;
+    transition: opacity 100ms ease-in-out;
+  }
+
+  a:hover {
+    opacity: 0.5;
+  }
+
+  img {
+    display: inline-block;
+    height: 1.5rem;
+    width: auto;
+    filter: invert(1);
+  }
+</style>
+
+<script is:inline>
+  var el = document.querySelector('.p-i');
+  var text = `\u002b\u0034\u0039\u0020\u0031\u0035\u0031\u0020\u0035\u0034\u0038\u0038\u0032\u0039\u0032\u0036`;
+  el.href = `\u0074\u0065\u006c\u003a${text.replace(/\s/g, '')}`;
+</script>

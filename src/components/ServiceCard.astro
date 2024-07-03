@@ -1,0 +1,80 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+interface Props {
+  headline: string;
+  href: string | null;
+  iconSource: ImageMetadata;
+  iconAlt: string;
+  backgroundSource: ImageMetadata;
+  backgroundAlt: string;
+  description: string;
+}
+
+const { headline, href, iconSource, iconAlt, backgroundSource, backgroundAlt, description } = Astro.props;
+---
+
+<a href={href} aria-disabled={!href}>
+  <Image src={backgroundSource} alt={backgroundAlt} />
+  <div>
+    <Image src={iconSource} alt={iconAlt} />
+    <h3>{headline}</h3>
+    <p set:html={description} />
+  </div>
+</a>
+
+<style>
+  a {
+    width: 20rem;
+    position: relative;
+    border-radius: 1rem;
+    outline: 1px solid var(--color-gray-700);
+    color: inherit;
+    /*outline: 1px solid blue;*/
+  }
+
+  a[aria-disabled='true'] {
+    pointer-events: none;
+    opacity: 0.55;
+  }
+
+  a > img {
+    width: 100%;
+    height: 26rem;
+    object-fit: cover;
+    filter: brightness(0.5) contrast(1.25);
+    border-radius: 1rem;
+  }
+
+  a div {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-inline: 1.5rem;
+    width: calc(100% - 3rem);
+  }
+
+  a div img {
+    width: 5rem;
+    height: 5rem;
+    margin-bottom: 1rem;
+    filter: invert(1);
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    font-family: inherit;
+    text-transform: inherit;
+    margin-block: 0.5rem 2rem;
+    letter-spacing: inherit;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+</style>

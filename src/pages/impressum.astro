@@ -1,0 +1,76 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+import { addressFull } from '../env.ts';
+
+import RedactedPhoneLink from '../components/RedactedPhoneLink.astro';
+import RedactedMailLink from '../components/RedactedMailLink.astro';
+---
+
+<Layout title="Impressum" description="Hier findet ihr das Impressum von FM Veranstaltungstechnik">
+  <section>
+    <h1>Impressum</h1>
+    <h2>Angaben gemäß § 5 TMG</h2>
+    <p set:html={addressFull} />
+    <h2>Kontakt</h2>
+    <p>
+      Telefon: <RedactedPhoneLink /><br />
+      E-Mail: <RedactedMailLink />
+    </p>
+    <h2>Verbraucherstreitbeilegung / Universalschlichtungsstelle</h2>
+    <p>
+      Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle
+      teilzunehmen.
+    </p>
+    <p class="source">Quelle: <a href="https://www.e-recht24.de">eRecht24</a></p>
+  </section>
+</Layout>
+
+<style>
+  section {
+    max-width: calc(var(--max-width) - var(--content-border) * 2);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-inline: auto;
+    min-height: calc(100vh - 5rem);
+  }
+
+  section > * {
+    margin-inline: var(--content-border);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-align: left;
+  }
+
+  h1 {
+    padding-top: 6rem;
+    margin: 0 0 2rem;
+    font-size: 2rem;
+  }
+  h2 {
+    margin: 1rem 0;
+  }
+
+  p,
+  ul {
+    margin: 0 0 0.75rem;
+  }
+
+  .source {
+    margin: 2rem 0 4rem;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+    transition: opacity 0.1s ease-in-out;
+  }
+
+  a:hover {
+    opacity: 0.5;
+  }
+</style>

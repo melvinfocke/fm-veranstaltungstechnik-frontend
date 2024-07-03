@@ -1,0 +1,158 @@
+---
+
+---
+
+<form method="post" action="https://api.fm-veranstaltungstechnik.de/v1/contact-form/submit">
+  <div class="two-horizonal-fields">
+    <div>
+      <label for="first_name">Vorname:</label>
+      <input type="text" id="first_name" name="first_name" required />
+    </div>
+    <div>
+      <label for="last_name">Nachname:</label>
+      <input type="text" id="last_name" name="last_name" required />
+    </div>
+  </div>
+
+  <label for="email">E-Mail:</label>
+  <input type="email" id="email" name="email" required />
+
+  <label for="type_of_request">Art der Anfrage:</label>
+  <select id="type_of_request" name="type_of_request" required>
+    <option value="">Wähle aus…</option>
+    <option value="Musik / DJ">Musik / DJ</option>
+    <option value="Lasershow">Lasershow</option>
+    <option value="Verleih von Technik">Verleih von Technik</option>
+    <option value="Anderes Anliegen">Anderes Anliegen</option></select
+  >
+
+  <div class="two-horizonal-fields">
+    <div>
+      <label for="location">Ort der Veranstaltung:</label>
+      <input type="text" id="location" name="location" required />
+    </div>
+    <div>
+      <label for="date">Datum:</label>
+      <input type="date" id="date" name="date" required />
+    </div>
+  </div>
+  <div class="two-horizonal-fields">
+    <div>
+      <label for="time_start">Uhrzeit von:</label>
+      <input type="time" id="time_start" name="time_start" required />
+    </div>
+    <div>
+      <label for="time_end">Uhrzeit bis:</label>
+      <input type="time" id="time_end" name="time_end" required />
+    </div>
+  </div>
+
+  <label for="message">Nachricht:</label>
+  <textarea id="message" name="message" rows="5" cols="50" required></textarea>
+
+  <div class="submit-wrapper">
+    <input type="submit" value="Absenden" />
+  </div>
+</form>
+
+<style>
+  form {
+    margin: 0 auto;
+  }
+
+  label {
+    display: block;
+    margin-block: 0.5rem;
+    color: inherit;
+    font-size: 0.75rem;
+  }
+
+  input[type='text'],
+  input[type='email'],
+  input[type='date'],
+  input[type='time'],
+  select,
+  textarea {
+    width: 100%;
+    padding: 0.625rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    background: transparent;
+    color: inherit;
+    min-height: 2.625rem;
+    height: auto;
+  }
+
+  textarea {
+    resize: vertical;
+    font-family: inherit;
+  }
+
+  input[type='submit'] {
+    background-color: #4caf50;
+    color: var(--color-black);
+    padding: 0.625rem 1.25rem;
+    border: none;
+    border-radius: 1.2rem;
+    cursor: pointer;
+    font-size: 1rem;
+    background-color: var(--color-white);
+  }
+
+  input[type='submit']:hover {
+    filter: brightness(0.9);
+  }
+
+  .two-horizonal-fields {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .two-horizonal-fields div {
+    width: 100%;
+  }
+
+  select {
+    background: inherit;
+  }
+
+  select option {
+    background: var(--color-blue-900);
+  }
+
+  .submit-wrapper {
+    text-align: right;
+  }
+</style>
+
+<script is:inline>
+  document.querySelector('form').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+
+    const response = await fetch('https://api.fm-veranstaltungstechnik.de/v1/contact-form/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ ...data, timestamp: new Date().toISOString() })
+    });
+
+    if (response.ok) {
+      alert('Formular wurde erfolgreich abgesendet. Wir melden uns in Kürze bei dir.');
+      event.target.reset();
+    } else if (response.status === 429) {
+      alert('Du hast innerhalb kurzer Zeit zu viele Anfragen gesendet. Bitte versuche es später erneut.');
+    } else {
+      alert(
+        'Fehler beim Absenden des Formulars. Bitte versuche es später erneut oder kontaktiere uns direkt per E-Mail oder Telefon.'
+      );
+    }
+  });
+</script>

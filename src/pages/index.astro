@@ -1,0 +1,117 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Features from '../components/Features.astro';
+import FeatureCard from '../components/FeatureCard.astro';
+import Services from '../components/Services.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import Gallery from '../components/Gallery.astro';
+import SocialProof from '../components/SocialProof.astro';
+import ReviewCard from '../components/ReviewCard.astro';
+import Contact from '../components/Contact.astro';
+
+import { addressCondesed } from '../env';
+
+import heroImage from '../assets/hero.png';
+
+import featureIcon1 from '../assets/consultant-icon.png';
+import featureIcon2 from '../assets/ribbon-with-star.png';
+import featureIcon3 from '../assets/reputation-icon.png';
+import featureIcon4 from '../assets/checkmark-stamp-icon.png';
+
+import serviceBackground1 from '../assets/music-dj.jpg';
+import serviceBackground2 from '../assets/lasershow.jpg';
+import serviceBackground3 from '../assets/rental-of-equipment.jpg';
+import serviceIcon1 from '../assets/headphones-icon.png';
+import serviceIcon2 from '../assets/projector.png';
+import serviceIcon3 from '../assets/cooperate-hand-shake-icon.png';
+
+import galleryImage1 from '../assets/gallery-01.jpg';
+import galleryImage2 from '../assets/gallery-02.jpg';
+import galleryImage3 from '../assets/gallery-03.jpg';
+import galleryImage4 from '../assets/gallery-04.jpg';
+
+import reviewProfile1 from '../assets/user-review-profile-1.png';
+import reviewProfile2 from '../assets/user-review-profile-2.png';
+import reviewProfile3 from '../assets/user-review-profile-3.png';
+
+import contactLocationIcon from '../assets/location-icon.png';
+import contactPhoneIcon from '../assets/phone-icon.png';
+import contactMailIcon from '../assets/mail-icon.png';
+---
+
+<Layout
+  description="Willkommen bei unserem professionellen DJ- und Event-Service! Wir sind ein kleines, hochmotiviertes Team aus zwei Personen mit über zehn Jahren Erfahrung."
+>
+  <Hero
+    headline={`FM&nbsp;Veran&shy;staltungs&shy;technik`}
+    imageSource={heroImage}
+    body={`Willkommen bei unserem professionellen DJ- und Event-Service! Wir sind ein kleines, hochmotiviertes Team aus zwei Personen mit über zehn Jahren Erfahrung.<br /><br />Eure Zufriedenheit und Wünsche sind unser oberstes Ziel. Was einst als Hobby meines Vaters begann, hat sich zu unserer Leidenschaft entwickelt. Dank seiner Inspiration habe ich mich intensiv mit der Technik und Eventplanung auseinandergesetzt.<br /><br />Wir nutzen die aktuellste Technik, um eure Veranstaltungen unvergesslich zu machen.`}
+  />
+  <Features>
+    <FeatureCard iconSource={featureIcon1} iconAlt="Consultant Icon" text="Kundenorientiertes Arbeiten" />
+    <FeatureCard iconSource={featureIcon2} iconAlt="Ribbon With Star Icon" text={`Über 10 Jahre<br />Erfahrung`} />
+    <FeatureCard iconSource={featureIcon3} iconAlt="Reputation Icon" text={`Gutes Preisleistungs&shy;verhältnis`} />
+    <FeatureCard
+      iconSource={featureIcon4}
+      iconAlt="Checkmark Stamp Icon"
+      text="Anfahrt und Aufbau im Preis enthalten"
+    />
+  </Features>
+  <Services>
+    <ServiceCard
+      headline="Musik / DJ"
+      href="/musik-dj"
+      iconSource={serviceIcon1}
+      iconAlt="Headphones Icon"
+      backgroundSource={serviceBackground1}
+      backgroundAlt="Music / DJ Image"
+      description="Egal ob Firmenfeier, Partys oder Geburtstage, klicke hier, um mehr zu erfahren."
+    />
+    <ServiceCard
+      headline="Lasershow"
+      href="/lasershow"
+      iconSource={serviceIcon2}
+      iconAlt="Projector Icon"
+      backgroundSource={serviceBackground2}
+      backgroundAlt="Lasershow Image"
+      description="Buche eine eigene Lasershow oder buche die Laser zu deiner Feier dazu. Klicke hier für mehr Infos."
+    />
+    <ServiceCard
+      headline="Verleih von Technik"
+      href={null}
+      iconSource={serviceIcon3}
+      iconAlt="Cooperate Hand Shake Icon"
+      backgroundSource={serviceBackground3}
+      backgroundAlt="Rental of Equipment Image"
+      description="Noch im Aufbau. Bald könnt ihr bei uns Technik für eure Veranstaltungen mieten."
+    />
+  </Services>
+  <Gallery sources={[galleryImage1, galleryImage2, galleryImage3, galleryImage4]} />
+  <SocialProof>
+    <ReviewCard
+      image={reviewProfile1}
+      name="Diana"
+      body={`Hab die zwei zu meinem 40ten Ge&shy;burtstag gebucht. Die beiden haben den Partyraum mit ca. 35 Leuten zum Tanzen gebracht … sind auf Musikwünsche eingegangen … und haben sogar eine animierte Dia&shy;show mit einem Liedwunsch erstellt (was vorher abgesprochen war) … das kam super an … Die zwei sind sehr sympathisch und gut aufeinan&shy;der eingespielt … würde sie jeder&shy;zeit wieder buchen.`}
+    />
+    <ReviewCard
+      image={reviewProfile2}
+      name="Christian"
+      body={`Ich habe die beiden zum 60. Ge&shy;burtstag meines Opas für die Musik und Beleuchtung geholt und wir wa&shy;ren mega zufrieden. Es wurde auf unsere Musikwün&shy;sche eingegangen und die Partybeleuchtung war auch super. Sie wirkten total nett und professionell. Würde die beiden beim nächsten Mal wieder wählen. Vielen Dank nochmal für die unver&shy;gessliche Feier!`}
+    />
+    <ReviewCard
+      image={reviewProfile3}
+      name="Tom"
+      body={`Die zwei Jungs haben die Licht- und Tontechnik unserer Abi-Feier über&shy;nommen. Alles war top und die Fei&shy;er hat total Spaß gemacht. Es wurde gute Musik gespielt und auch die Beleuchtung war richtig krass. Wir feierten bis tief in die Nacht und die beiden waren wirklich bis ganz zum Ende dabei. Bei der nächsten gro&shy;ßen Party gerne wieder :)`}
+    />
+  </SocialProof>
+  <Contact
+    locationIconSource={contactLocationIcon}
+    locationIconAlt="Location Icon"
+    phoneIconSource={contactPhoneIcon}
+    phoneIconAlt="Phone Icon"
+    mailIconSource={contactMailIcon}
+    mailIconAlt="Mail Icon"
+    address={addressCondesed}
+  />
+</Layout>

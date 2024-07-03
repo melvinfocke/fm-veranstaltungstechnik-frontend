@@ -1,0 +1,38 @@
+---
+
+---
+
+<section id="services">
+  <h2>Übersicht unserer Services<br /><span>(auch in Kombination buchbar)</span></h2>
+  <div class="content-wrapper">
+    <slot />
+  </div>
+</section>
+
+<style>
+  section {
+    max-width: calc(var(--max-width) + var(--content-border) * 2);
+    width: 100%;
+    margin-inline: auto;
+    /*outline: 1px solid red;*/
+  }
+
+  h2 {
+    margin-inline: var(--content-border);
+    padding-block: 3rem;
+  }
+
+  h2 span {
+    font-size: 0.66em;
+    margin-top: 0.5rem;
+    display: block;
+  }
+
+  .content-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-inline: var(--content-border);
+  }
+</style>

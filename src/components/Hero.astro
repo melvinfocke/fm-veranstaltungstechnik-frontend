@@ -1,0 +1,115 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  imageSource: ImageMetadata;
+  headline: string;
+  body: string;
+}
+
+const { imageSource, headline, body } = Astro.props;
+---
+
+<section>
+  <div class="image-container">
+    <Image src={imageSource} alt="Hero Image" />
+  </div>
+  <div class="content-container">
+    <h1 set:html={headline} />
+    <p set:html={body} />
+  </div>
+</section>
+
+<style>
+  section {
+    position: relative;
+    padding-top: 3.875rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-inline: auto;
+    width: 100%;
+    max-width: calc(var(--max-width) + var(--content-border) * 2);
+    text-align: center;
+    overflow: hidden;
+    /*outline: 1px solid red;*/
+  }
+
+  section::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(var(--color-blue-900), var(--color-black));
+    z-index: -1;
+  }
+
+  section > * {
+    max-width: 25.375rem;
+    width: 100%;
+    /*outline: 1px solid blue;*/
+  }
+
+  .image-container {
+    position: relative;
+    margin-top: 1rem;
+    margin-left: var(--content-border);
+  }
+
+  .image-container::before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    width: calc(var(--max-width) * 0.625);
+    height: calc(var(--max-width) * 0.625);
+    border-radius: 50%;
+    right: -6.125rem;
+    top: 0;
+    background: radial-gradient(var(--color-gray-100), var(--color-blue-700));
+    z-index: -1;
+  }
+
+  .content-container {
+    margin-right: var(--content-border);
+  }
+
+  img {
+    padding-top: 5rem;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: bottom;
+    display: block;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  @media screen and (max-width: 870px) {
+    section {
+      flex-direction: column;
+    }
+
+    .image-container,
+    .content-container {
+      margin-inline: 0;
+    }
+    .content-container {
+      background: linear-gradient(180deg, var(--color-gray-900) 0%, var(--color-black) 100%);
+      padding: 2.5rem 15rem 1rem;
+      margin-inline: var(--content-border);
+    }
+
+    section > * {
+      width: calc(100% - var(--content-border) * 2 - 1.1875rem * 2);
+    }
+
+    .image-container::before {
+      right: unset;
+      transform: translateX(-50%);
+    }
+  }
+</style>

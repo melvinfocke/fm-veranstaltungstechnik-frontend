@@ -1,0 +1,77 @@
+---
+import Hero from '../components/Hero.astro';
+import Layout from '../layouts/Layout.astro';
+import Gallery from '../components/Gallery.astro';
+
+import { addressCondesed } from '../env';
+
+import TwoTextColumnSection from '../components/TwoTextColumnSection.astro';
+import Contact from '../components/Contact.astro';
+
+import heroImage from '../assets/hero.png';
+
+import galleryImage1 from '../assets/musik-dj-galerie-01.jpg';
+import galleryImage2 from '../assets/musik-dj-galerie-02.jpg';
+import galleryImage3 from '../assets/musik-dj-galerie-03.jpg';
+import galleryImage4 from '../assets/musik-dj-galerie-04.jpg';
+import galleryImage5 from '../assets/musik-dj-galerie-05.jpg';
+import galleryImage6 from '../assets/musik-dj-galerie-06.jpg';
+import galleryImage7 from '../assets/musik-dj-galerie-07.jpg';
+import galleryImage8 from '../assets/musik-dj-galerie-08.jpg';
+
+import contactLocationIcon from '../assets/location-icon.png';
+import contactPhoneIcon from '../assets/phone-icon.png';
+import contactMailIcon from '../assets/mail-icon.png';
+---
+
+<Layout
+  title="Musik / DJ"
+  description="Entdeckt unseren vielseitigen Musik- und DJ-Service für jede Art von Veranstaltung. Hier findet ihr alle wichtigen Informationen."
+>
+  <Hero
+    headline="Musik / DJ"
+    imageSource={heroImage}
+    body={`Entdeckt unseren vielseitigen Musik- und DJ-Service für jede Art von Veranstaltung. Hier findet ihr alle
+      wichtigen Informationen.`}
+  />
+  <Gallery
+    sources={[
+      galleryImage1,
+      galleryImage2,
+      galleryImage3,
+      galleryImage4,
+      galleryImage5,
+      galleryImage6,
+      galleryImage7,
+      galleryImage8
+    ]}
+  />
+  <TwoTextColumnSection
+    title1="Allgemein"
+    text1={`Wir bieten Musik aller Arten und Genres und passen uns den Feierlichkeiten entsprechend an. Von Kindermusik
+      bis hin zu Elektrobeats ist alles dabei. Wir sind immer auf dem aktuellsten Stand.<br /><br />Sollte der Kunde
+      spezielle Wünsche oder eine direkte Liste haben, kann diese uns vorgelegt werden. Es ist uns wichtig, direkt auf
+      unsere Kunden einzugehen und Musikwünsche nehmen wir gerne an.<br /><br />Bei Hochzeiten, Feiern oder Ähnlichem wird
+      von uns ein Mikrofon gestellt oder gegebenenfalls eine kleine Ansprache gehalten. Wenn gewünscht, kann eine Lasershow
+      dazugebucht werden.<br /><br />Alle anderen Anliegen werden in Absprache mit uns berücksichtigt.
+
+`}
+    title2="Wissenswertes"
+    text2={`Wir berechnen den Festpreis je nach Feierlichkeit und den Anforderungen des Kunden. Bei uns gibt es keinen
+      Aufpreis nach Mitternacht!<br /><br />Der Kunde muss uns mindestens drei Stunden vor Veranstaltungsbeginn die
+      Location zur Verfügung stellen, sodass wir aufbauen und einen Sound- bzw. Technik-Check durchführen können. Wir
+      benötigen einen Tisch und einen Stuhl für unsere Technik sowie einen funktionierenden Stromanschluss.<br /><br />
+      Hochzeiten und größere Veranstaltungen, die mehr Zeit in Anspruch nehmen, müssen bei uns langfristig angemeldet und 
+      individuell mit dem Kunden geplant werden.<br /><br />Alles Weitere besprechen wir mit dem Kunden per E-Mail, 
+      telefonisch oder gegebenenfalls persönlich auf Anfrage.`}
+  />
+  <Contact
+    locationIconSource={contactLocationIcon}
+    locationIconAlt="Location Icon"
+    phoneIconSource={contactPhoneIcon}
+    phoneIconAlt="Phone Icon"
+    mailIconSource={contactMailIcon}
+    mailIconAlt="Mail Icon"
+    address={addressCondesed}
+  />
+</Layout>

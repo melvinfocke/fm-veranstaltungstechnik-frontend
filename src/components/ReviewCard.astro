@@ -1,0 +1,66 @@
+---
+import { Image } from 'astro:assets';
+
+export interface Props {
+  image: ImageMetadata;
+  name: string;
+  body: string;
+}
+
+const { image, name, body } = Astro.props;
+---
+
+<div class="review-card">
+  <div class="reviewer">
+    <Image src={image} alt={'Profilbild von ' + name} />
+    <h3>{name}</h3>
+  </div>
+  <img class="rating" src="/5-star-rating.svg" alt="Icon mit fünf goldenen Sternen" />
+  <p set:html={body} />
+</div>
+
+<style>
+  .review-card {
+    border-radius: 1rem;
+    background: var(--color-blue-800);
+    width: 20rem;
+  }
+
+  .reviewer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.1875rem 1.1875rem 0.625rem;
+    width: auto;
+  }
+
+  .reviewer img {
+    height: 3rem;
+    width: auto;
+    aspect-ratio: 1/1;
+  }
+
+  .reviewer > h3 {
+    margin-left: 0.875rem;
+    width: 100%;
+    font-family: inherit;
+    text-transform: inherit;
+    letter-spacing: inherit;
+    font-size: 1.2rem;
+    text-align: left;
+  }
+
+  .rating {
+    height: 1rem;
+    width: auto;
+    aspect-ratio: 75/11;
+    margin: 0 1.1875rem 0.625rem;
+    display: block;
+  }
+
+  p {
+    margin: 0 1.1875rem 1.25rem;
+    text-align: justify;
+    font-size: 1rem;
+  }
+</style>
