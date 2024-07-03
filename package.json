@@ -1,7 +1,8 @@
 {
-  "name": "",
+  "name": "fm-veranstaltungstechnik-frontend",
   "type": "module",
   "version": "0.0.1",
+  "description": "The frontend for the website www.fm-veranstaltungstechnik.de",
   "scripts": {
     "dev": "astro dev --host 0.0.0.0",
     "start": "astro dev",
@@ -9,6 +10,21 @@
     "preview": "astro preview",
     "astro": "astro"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/melvinfocke/fm-veranstaltungstechnik-frontend.git"
+  },
+  "keywords": [
+    "DJ",
+    "Music",
+    "Events"
+  ],
+  "author": "Melvin Focke",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/melvinfocke/fm-veranstaltungstechnik-frontend/issues"
+  },
+  "homepage": "https://github.com/melvinfocke/fm-veranstaltungstechnik-frontend#readme",
   "dependencies": {
     "@astrojs/check": "^0.7.0",
     "@astrojs/sitemap": "^3.1.6",
