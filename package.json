@@ -1,7 +1,7 @@
 {
   "name": "fm-veranstaltungstechnik-frontend",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "The frontend for the website www.fm-veranstaltungstechnik.de",
   "scripts": {
     "dev": "astro dev --host 0.0.0.0",
