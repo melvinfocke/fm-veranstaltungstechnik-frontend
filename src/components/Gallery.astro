@@ -13,7 +13,6 @@ const { sources } = Astro.props;
 <section id="galerie">
   <h2>Galerie</h2>
   <div class="content-wrapper">
-    <!--<a href="#">Alle anzeigen →</a> -->
     {sources.map((source, i) => <Image src={source} alt={`Gallery Image ${i + 1}`} />)}
   </div>
 </section>
@@ -23,7 +22,6 @@ const { sources } = Astro.props;
     max-width: calc(var(--max-width) + var(--content-border) * 2);
     width: 100%;
     margin-inline: auto;
-    /*outline: 1px solid red;*/
     background: radial-gradient(var(--color-blue-900), var(--color-black));
   }
   h2 {
