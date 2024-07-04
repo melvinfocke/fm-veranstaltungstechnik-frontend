@@ -24,11 +24,23 @@ const { iconSource, iconAlt, text } = Astro.props;
 
   img {
     filter: invert(1);
-    height: 5rem;
-    width: 5rem;
+    height: 4.5rem;
+    width: 4.5rem;
   }
 
   p {
     margin-top: 0.5rem;
+    font-size: 1rem;
+  }
+  @media (min-width: 400px) {
+    div {
+      width: 10rem;
+    }
+  }
+
+  @media (min-width: 524px) {
+    div {
+      width: 14.625rem;
+    }
   }
 </style>

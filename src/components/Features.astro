@@ -63,15 +63,28 @@ import image0 from '../assets/cool-background.jpg';
       transform: translateY(-50%);
     }
 
-    @media (min-width: 524px) {
+    @media (min-width: 400px) {
+      .content-wrapper {
+        gap: 2.5rem;
+      }
+
       .background-image {
-        height: 30rem;
+        height: 28rem;
+      }
+    }
+
+    @media (min-width: 524px) {
+      .content-wrapper {
+        gap: 1.5rem;
+      }
+      .background-image {
+        height: 28rem;
       }
     }
 
     @media (min-width: 1073px) {
       .background-image {
-        height: 20rem;
+        height: 19rem;
         flex-wrap: nowrap;
       }
     }
