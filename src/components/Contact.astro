@@ -4,6 +4,7 @@ import { Image } from 'astro:assets';
 import ContactForm from './ContactForm.astro';
 import RedactedMailLink from './RedactedMailLink.astro';
 import RedactedPhoneLink from './RedactedPhoneLink.astro';
+import RedactedCondensedAddress from './RedactedCondensedAddress.astro';
 
 interface Props {
   locationIconSource: ImageMetadata;
@@ -12,11 +13,9 @@ interface Props {
   phoneIconAlt: string;
   mailIconSource: ImageMetadata;
   mailIconAlt: string;
-  address: string;
 }
 
-const { locationIconSource, locationIconAlt, phoneIconSource, phoneIconAlt, mailIconSource, mailIconAlt, address } =
-  Astro.props;
+const { locationIconSource, locationIconAlt, phoneIconSource, phoneIconAlt, mailIconSource, mailIconAlt } = Astro.props;
 ---
 
 <section id="kontakt">
@@ -28,7 +27,7 @@ const { locationIconSource, locationIconAlt, phoneIconSource, phoneIconAlt, mail
     <div>
       <div class="contact-info-item">
         <Image src={locationIconSource} alt={locationIconAlt} />
-        <p set:html={address} />
+        <p class="a"><RedactedCondensedAddress /></p>
       </div>
       <div class="contact-info-item">
         <Image src={phoneIconSource} alt={phoneIconAlt} />

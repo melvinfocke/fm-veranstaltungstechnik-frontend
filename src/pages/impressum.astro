@@ -1,17 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-import { addressFull } from '../env.ts';
-
 import RedactedPhoneLink from '../components/RedactedPhoneLink.astro';
 import RedactedMailLink from '../components/RedactedMailLink.astro';
+import RedactedFullAddress from '../components/RedactedFullAddress.astro';
 ---
 
 <Layout title="Impressum" description="Hier findet ihr das Impressum von FM Veranstaltungstechnik">
   <section>
     <h1>Impressum</h1>
     <h2>Angaben gemäß § 5 TMG</h2>
-    <p set:html={addressFull} />
+    <p class="a"><RedactedFullAddress /></p>
     <h2>Kontakt</h2>
     <p>
       Telefon: <RedactedPhoneLink /><br />

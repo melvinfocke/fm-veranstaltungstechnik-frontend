@@ -1,10 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-import { addressFull } from '../env';
-
 import RedactedPhoneLink from '../components/RedactedPhoneLink.astro';
 import RedactedMailLink from '../components/RedactedMailLink.astro';
+import RedactedFullAddress from '../components/RedactedFullAddress.astro';
 ---
 
 <Layout
@@ -105,7 +104,7 @@ import RedactedMailLink from '../components/RedactedMailLink.astro';
     </p>
     <h3>Hinweis zur verantwortlichen Stelle</h3>
     <p>Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:</p>
-    <p set:html={addressFull} />
+    <p class="a"><RedactedFullAddress /></p>
 
     <p>
       Telefon: <RedactedPhoneLink /><br />
