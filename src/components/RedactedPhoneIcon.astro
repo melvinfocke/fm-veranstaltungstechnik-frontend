@@ -36,4 +36,5 @@ const { icon, alt } = Astro.props;
   var el = document.querySelector('.p-i');
   var text = `\u002b\u0034\u0039\u0020\u0031\u0035\u0031\u0020\u0035\u0034\u0038\u0038\u0032\u0039\u0032\u0036`;
   el.href = `\u0074\u0065\u006c\u003a${text.replace(/\s/g, '')}`;
+  el.title = text;
 </script>
