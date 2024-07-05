@@ -1,11 +1,11 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import image0 from '../assets/cool-background.jpg';
 ---
 
 <section>
   <h2>Features</h2>
-  <Image src={image0} alt="Cool Background" class="background-image" />
+  <Picture src={image0} alt="Cool Background" class="background-image" widths={[265, 530, 1060, 1600]} />
   <div class="content-wrapper">
     <slot />
   </div>

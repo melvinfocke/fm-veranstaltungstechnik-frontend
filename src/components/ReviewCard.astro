@@ -1,6 +1,8 @@
 ---
 import { Image } from 'astro:assets';
 
+import starRating from '../assets/5-star-rating.svg';
+
 export interface Props {
   image: ImageMetadata;
   name: string;
@@ -15,7 +17,7 @@ const { image, name, body } = Astro.props;
     <Image src={image} alt={'Profilbild von ' + name} />
     <h3>{name}</h3>
   </div>
-  <img class="rating" src="/5-star-rating.svg" alt="Icon mit fünf goldenen Sternen" />
+  <Image class="rating" src={starRating} alt="Icon mit fünf goldenen Sternen" />
   <p set:html={body} />
 </div>
 
