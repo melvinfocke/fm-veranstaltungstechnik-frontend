@@ -30,19 +30,44 @@ import contactMailIcon from '../assets/mail-icon.svg';
   <Hero
     headline="Lasershow"
     imageSource={heroImage}
+    imageAlt="Beide DJ- und Event-Techniker stehen nebeneinander und lächeln in die Kamera."
     body={`Unsere Lasershow ist ein Highlight für jede Veranstaltung. Wir bieten verschiedene Lasershows für jeden
         Anlass an. Ob Hochzeit, Geburtstag oder Firmenfeier, wir haben das passende Angebot für euch.`}
   />
   <Gallery
-    sources={[
-      galleryImage1,
-      galleryImage2,
-      galleryImage3,
-      galleryImage4,
-      galleryImage5,
-      galleryImage6,
-      galleryImage7,
-      galleryImage8
+    photos={[
+      {
+        src: galleryImage1,
+        alt: 'Laserstrahlen in Blau, Grün, Gelb und Rot beleuchten eine Bühne mit künstlichem Nebel.'
+      },
+      {
+        src: galleryImage2,
+        alt: 'Eine Bühne, die mit lila und grünen Laserlichtern beleuchtet wird.'
+      },
+      {
+        src: galleryImage3,
+        alt: 'Eine blau-lila Lasershow erleuchtet einen dunklen Raum mit diagonalen Linien.'
+      },
+      {
+        src: galleryImage4,
+        alt: 'Zwei Laptops sind in einem dunklen Raum aufgestellt, im Hintergrund erstrahlt eine gelbe Lasershow.'
+      },
+      {
+        src: galleryImage5,
+        alt: 'Ein dunkler Raum mit gelben und lila Lichtern, die einen Lichttunnel bilden.'
+      },
+      {
+        src: galleryImage6,
+        alt: 'Mehrfarbige Laserstrahlen kreuzen sich in der Mitte eines dunklen Raums.'
+      },
+      {
+        src: galleryImage7,
+        alt: 'Zwei Laserlichter leuchten in einem weißen Zelt und erzeugen blaue und lila Linien an der Decke und den Wänden.'
+      },
+      {
+        src: galleryImage8,
+        alt: 'Eine Gruppe von Menschen tanzt unter bunten Laserstrahlen und Lichteffekten in einem dunklen Raum.'
+      }
     ]}
   />
   <OneTextColumnWithWarningSection
@@ -57,14 +82,14 @@ import contactMailIcon from '../assets/mail-icon.svg';
         und schnelle Bewegungen enthält.<br /><br />Direktes oder bewusstes Hineinschauen in den Lichtpunkt des Lasers
         oder direkter Augenkontakt kann zu Verletzungen der Netzhaut führen.`}
     warningSource={warningIcon}
-    warningAlt="Lasershow"
+    warningAlt=""
   />
   <Contact
     locationIconSource={contactLocationIcon}
-    locationIconAlt="Location Icon"
+    locationIconAlt=""
     phoneIconSource={contactPhoneIcon}
-    phoneIconAlt="Phone Icon"
+    phoneIconAlt=""
     mailIconSource={contactMailIcon}
-    mailIconAlt="Mail Icon"
+    mailIconAlt=""
   />
 </Layout>

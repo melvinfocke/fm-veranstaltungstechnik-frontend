@@ -29,19 +29,44 @@ import contactMailIcon from '../assets/mail-icon.svg';
   <Hero
     headline="Musik / DJ"
     imageSource={heroImage}
+    imageAlt="Beide DJ- und Event-Techniker stehen nebeneinander und lächeln in die Kamera."
     body={`Entdeckt unseren vielseitigen Musik- und DJ-Service für jede Art von Veranstaltung. Hier findet ihr alle
       wichtigen Informationen.`}
   />
   <Gallery
-    sources={[
-      galleryImage1,
-      galleryImage2,
-      galleryImage3,
-      galleryImage4,
-      galleryImage5,
-      galleryImage6,
-      galleryImage7,
-      galleryImage8
+    photos={[
+      {
+        src: galleryImage1,
+        alt: 'Ein schwach beleuchteter Raum mit zwei Lautsprechern, Beleuchtungsausrüstung, einem DJ-Setup und roten und weißen Lichtern.'
+      },
+      {
+        src: galleryImage2,
+        alt: 'Eine hell beleuchtete Bühne mit Scheinwerfern in roter, blauer und grüner Beleuchtung.'
+      },
+      {
+        src: galleryImage3,
+        alt: 'Ein DJ mit Kopfhörern spielt Musik vor einer Bühne mit blauen Lichtern und einer Nebelmaschine'
+      },
+      {
+        src: galleryImage4,
+        alt: 'Eine Bühne wird mit Scheinwerfern beleuchtet und erzeugt eine dunkelblaue und grüne Lichtshow.'
+      },
+      {
+        src: galleryImage5,
+        alt: 'Ein weißes Pavillonzelt ist in einem grasbewachsenen Hof aufgebaut, im Hintergrund sind ein Anhänger mit Licht- und Tontechnik, Stühle und Tische zu sehen.'
+      },
+      {
+        src: galleryImage6,
+        alt: 'Eine Hochzeit steht kurz vor dem Beginn in einem schön dekorierten Raum, in dem ein DJ-Setup, Essen und Getränke bereitstehen.'
+      },
+      {
+        src: galleryImage7,
+        alt: 'Ein weißes Partyzelt ist draußen aufgebaut mit einem DJ-Pult, einem Sound- und Lichtsystem sowie Tischen und Stühlen für die Gäste.'
+      },
+      {
+        src: galleryImage8,
+        alt: 'Ein DJ-Setup mit einem Mischpult, ein paar Drum-Pads, einem Laptop und einem Glas Champagner steht auf einem Tisch in einem Raum mit roten Stühlen und einer weißen Tischdecke.'
+      }
     ]}
   />
   <TwoTextColumnSection
@@ -65,10 +90,10 @@ import contactMailIcon from '../assets/mail-icon.svg';
   />
   <Contact
     locationIconSource={contactLocationIcon}
-    locationIconAlt="Location Icon"
+    locationIconAlt=""
     phoneIconSource={contactPhoneIcon}
-    phoneIconAlt="Phone Icon"
+    phoneIconAlt=""
     mailIconSource={contactMailIcon}
-    mailIconAlt="Mail Icon"
+    mailIconAlt=""
   />
 </Layout>

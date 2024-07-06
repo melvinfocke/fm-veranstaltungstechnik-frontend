@@ -4,16 +4,17 @@ import type { ImageMetadata } from 'astro';
 
 interface Props {
   imageSource: ImageMetadata;
+  imageAlt: string;
   headline: string;
   body: string;
 }
 
-const { imageSource, headline, body } = Astro.props;
+const { imageSource, imageAlt, headline, body } = Astro.props;
 ---
 
 <section>
   <div class="image-container">
-    <Picture src={imageSource} alt="Hero Image" widths={[615, 923, 1230]} />
+    <Picture src={imageSource} alt={imageAlt} widths={[615, 923, 1230]} />
   </div>
   <div class="content-container">
     <h1 set:html={headline} />

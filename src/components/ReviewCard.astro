@@ -14,10 +14,10 @@ const { image, name, body } = Astro.props;
 
 <div class="review-card">
   <div class="reviewer">
-    <Image src={image} alt={'Profilbild von ' + name} />
+    <Image src={image} alt={'Profil von ' + name} />
     <h3>{name}</h3>
   </div>
-  <Image class="rating" src={starRating} alt="Icon mit fünf goldenen Sternen" />
+  <Image class="rating" src={starRating} alt="5-Sterne-Bewertung" />
   <p set:html={body} />
 </div>
 
