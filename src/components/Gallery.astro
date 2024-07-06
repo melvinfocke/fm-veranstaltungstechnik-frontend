@@ -13,7 +13,13 @@ const { photos } = Astro.props;
 <section id="galerie">
   <h2>Galerie</h2>
   <div class="content-wrapper">
-    {photos.map((photo) => <Picture src={photo.src} alt={photo.alt} widths={[520, 780, 1040, 1300]} />)}
+    {
+      photos.map((photo) => (
+        <div class="image-wrapper">
+          <Picture src={photo.src} alt={photo.alt} widths={[520, 780, 1040, 1300]} />
+        </div>
+      ))
+    }
   </div>
 </section>
 
@@ -24,10 +30,12 @@ const { photos } = Astro.props;
     margin-inline: auto;
     background: radial-gradient(var(--color-blue-900), var(--color-black));
   }
+
   h2 {
     padding-block: 3rem;
     margin-inline: var(--content-border);
   }
+
   .content-wrapper {
     position: relative;
     display: flex;
@@ -36,6 +44,7 @@ const { photos } = Astro.props;
     flex-wrap: wrap;
     margin-inline: var(--content-border);
   }
+
   a {
     position: absolute;
     right: 0;
@@ -44,28 +53,43 @@ const { photos } = Astro.props;
     text-decoration: none;
     font-size: 0.75em;
   }
-  img {
-    display: block;
+
+  .image-wrapper {
+    position: relative;
     width: 15.375rem;
     height: 22rem;
-    object-fit: cover;
+    overflow: hidden;
+    border-radius: 1rem;
     outline: 1px solid var(--color-gray-700);
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 1rem;
   }
 
   @media screen and (max-width: 565px) {
-    img {
+    .image-wrapper {
       max-width: calc(100vw - 2 * var(--content-border));
       width: 100%;
       height: calc((100vw - 2 * var(--content-border)) / 1.5);
+    }
+
+    .image-wrapper,
+    img {
       border-radius: 0;
     }
 
-    picture:first-of-type img {
+    .image-wrapper:first-of-type,
+    .image-wrapper:first-of-type img {
       border-radius: 1rem 1rem 0 0;
     }
 
-    picture:last-of-type img {
+    .image-wrapper:last-of-type,
+    .image-wrapper:last-of-type img {
       border-radius: 0 0 1rem 1rem;
     }
   }
