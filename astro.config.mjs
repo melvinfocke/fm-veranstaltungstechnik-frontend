@@ -2,10 +2,11 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 import robotsTxt from 'astro-robots-txt';
+import { site } from './src/env';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.fm-veranstaltungstechnik.de',
+  site: site,
   integrations: [
     sitemap({
       changefreq: 'monthly',

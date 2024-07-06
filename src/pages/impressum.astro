@@ -6,7 +6,11 @@ import RedactedMailLink from '../components/RedactedMailLink.astro';
 import RedactedFullAddress from '../components/RedactedFullAddress.astro';
 ---
 
-<Layout title="Impressum" description="Hier findet ihr das Impressum von FM Veranstaltungstechnik">
+<Layout
+  title="Impressum"
+  description="Auf dieser Seite findet ihr alle rechtlichen Informationen zu FM Veranstaltungstechnik."
+  pathname={Astro.url.pathname}
+>
   <section>
     <h1>Impressum</h1>
     <h2>Angaben gemäß §&nbsp;5&nbsp;TMG</h2>
