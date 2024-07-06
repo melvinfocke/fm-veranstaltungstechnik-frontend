@@ -1,12 +1,12 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 
 import backgroundImage from '../assets/cool-background.jpg';
 ---
 
 <section>
   <h2>Social Proof</h2>
-  <Image src={backgroundImage} alt="Cool Background" class="background-image" />
+  <Picture src={backgroundImage} alt="Cool Background" widths={[530, 795, 1060]} class="background-image" />
   <div class="content-wrapper">
     <slot />
   </div>
@@ -18,6 +18,7 @@ import backgroundImage from '../assets/cool-background.jpg';
     width: 100%;
     margin-inline: auto;
     position: relative;
+    height: 93rem;
   }
 
   section::before,
@@ -42,10 +43,10 @@ import backgroundImage from '../assets/cool-background.jpg';
 
   .background-image {
     width: 100%;
+    height: 100%;
     object-fit: cover;
     filter: brightness(0.75);
     display: block;
-    height: 93rem;
   }
 
   h2 {
@@ -65,13 +66,13 @@ import backgroundImage from '../assets/cool-background.jpg';
   }
 
   @media (min-width: 729px) {
-    .background-image {
+    section {
       height: 64rem;
     }
   }
 
   @media (min-width: 1073px) {
-    .background-image {
+    section {
       height: 38rem;
     }
   }

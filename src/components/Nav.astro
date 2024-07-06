@@ -294,7 +294,7 @@ import cameraIcon from '../assets/camera-icon.svg';
         document.querySelector('#nav-toggle').checked = false;
 
         if (fromURL.pathname !== toURL.pathname) {
-          return setTimeout(() => (window.location.href = toURL.href), screen.width <= 670 ? 250 : 1);
+          return setTimeout(() => (window.location.href = toURL.href), screen.width <= 690 ? 250 : 1);
         }
         toURL.hash.length == 0 ? window.scrollTo(0, 0) : document.querySelector(toURL.hash)?.scrollIntoView();
       });

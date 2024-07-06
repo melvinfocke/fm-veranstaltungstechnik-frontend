@@ -59,9 +59,9 @@ const { sources } = Astro.props;
 
   @media screen and (max-width: 565px) {
     img {
+      max-width: calc(100vw - 2 * var(--content-border));
       width: 100%;
-      height: auto;
-      aspect-ratio: 3 / 2;
+      height: calc((100vw - 2 * var(--content-border)) / 1.5);
       border-radius: 0;
     }
 
