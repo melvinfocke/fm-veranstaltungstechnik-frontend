@@ -1,6 +1,6 @@
 ---
-import '@fontsource/big-shoulders-inline-text/900.css';
 import '@fontsource/open-sans/600.css';
+import '@fontsource/tourney/400.css';
 
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -59,7 +59,7 @@ const titlePrefix = title ? `${title} – ` : '';
 
   @media screen and (max-width: 557px) {
     :root {
-      font-size: 93.75%;
+      font-size: calc(8 / 9 * 100%);
     }
   }
 
@@ -87,20 +87,24 @@ const titlePrefix = title ? `${title} – ` : '';
   h4,
   h5,
   h6 {
-    font-family: 'Big Shoulders Inline Text', sans-serif;
-    line-height: 1.2;
-    letter-spacing: 0.05rem;
+    font-family: 'Tourney', sans-serif;
+    line-height: 1.1;
     text-transform: uppercase;
     margin: 0;
     text-align: center;
+    font-weight: 400;
+  }
+
+  h1 {
+    font-size: 2.5rem;
   }
 
   h2 {
-    font-size: 1.8rem;
+    font-size: 2.25rem;
   }
 
   h3 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
 
   h4 {

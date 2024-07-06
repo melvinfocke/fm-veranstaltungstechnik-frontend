@@ -17,7 +17,7 @@ const { imageSource, headline, body } = Astro.props;
   </div>
   <div class="content-container">
     <h1 set:html={headline} />
-    <p set:html={body} />
+    {body.split('<br /><br />').map((text) => <p set:html={text} />)}
   </div>
 </section>
 
@@ -82,8 +82,15 @@ const { imageSource, headline, body } = Astro.props;
   }
 
   h1 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    margin-bottom: 0.75rem;
+  }
+
+  p:last-of-type {
+    margin-bottom: 0;
   }
 
   @media screen and (max-width: 870px) {
