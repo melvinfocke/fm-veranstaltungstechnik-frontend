@@ -68,6 +68,7 @@ const titlePrefix = title ? `${title} – ` : '';
     --color-blue-800: #4b4f6cc7;
     --color-blue-900: #000736;
     --color-gray-100: #fdfdfd;
+    --color-gray-500: #bbbbbbc7;
     --color-gray-700: #83838346;
     --color-gray-900: #121421;
   }
@@ -134,5 +135,9 @@ const titlePrefix = title ? `${title} – ` : '';
 
   p {
     margin: 0;
+  }
+
+  ::selection {
+    background: var(--color-gray-500);
   }
 </style>
