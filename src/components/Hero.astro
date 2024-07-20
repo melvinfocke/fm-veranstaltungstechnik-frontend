@@ -16,8 +16,8 @@ const { imageSource, imageAlt, headline, body } = Astro.props;
   <div class="image-container">
     <Picture src={imageSource} alt={imageAlt} widths={[615, 923, 1230]} />
   </div>
-  <div class="content-container">
-    <h1 set:html={headline} />
+  <div id="hero-content-container" class="content-container">
+    <h1 id="hero-h1" set:html={headline} />
     {body.split('<br /><br />').map((text) => <p set:html={text} />)}
   </div>
 </section>
@@ -64,7 +64,7 @@ const { imageSource, imageAlt, headline, body } = Astro.props;
     height: calc(var(--max-width) * 0.625);
     border-radius: 50%;
     right: -6.125rem;
-    top: 0;
+    top: calc(var(--img-padding-top, 8rem) - 5rem);
     background: radial-gradient(var(--color-gray-100), var(--color-blue-700));
     z-index: -1;
   }
@@ -74,24 +74,12 @@ const { imageSource, imageAlt, headline, body } = Astro.props;
   }
 
   img {
-    padding-top: 5rem;
+    padding-top: var(--img-padding-top, 8rem);
     width: 100%;
     height: 100%;
     object-fit: contain;
     object-position: bottom;
     display: block;
-  }
-
-  h1 {
-    margin-bottom: 0.75rem;
-  }
-
-  p {
-    margin-bottom: 0.75rem;
-  }
-
-  p:last-of-type {
-    margin-bottom: 0;
   }
 
   @media screen and (max-width: 870px) {
@@ -117,5 +105,19 @@ const { imageSource, imageAlt, headline, body } = Astro.props;
       right: unset;
       transform: translateX(-50%);
     }
+  }
+</style>
+
+<style is:global>
+  #hero-content-container h1 {
+    margin-bottom: var(--h1-margin-bottom, 2.1rem);
+  }
+
+  #hero-content-container p {
+    margin-bottom: var(--p-margin-bottom, 0.7rem);
+  }
+
+  #hero-content-container p:last-of-type {
+    margin-bottom: 0;
   }
 </style>

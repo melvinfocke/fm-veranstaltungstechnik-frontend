@@ -1,11 +1,15 @@
 ---
+import '@fontsource/open-sans/400.css';
 import '@fontsource/open-sans/600.css';
-import '@fontsource/tourney/400.css';
+import '@fontsource/open-sans/700.css';
+import '@fontsource/big-shoulders-inline-text/700.css';
+import '@fontsource/big-shoulders-inline-text/900.css';
 
 import { site } from '../env';
 
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import StyleSwitcher from '../components/StyleSwitcher.astro';
 
 interface Props {
   title?: string;
@@ -44,6 +48,7 @@ const titlePrefix = title ? `${title} – ` : '';
       <slot />
     </main>
     <Footer />
+    <StyleSwitcher />
   </body>
 </html>
 <style is:global>
@@ -89,6 +94,7 @@ const titlePrefix = title ? `${title} – ` : '';
     line-height: 1.35;
     color: var(--color-white);
     font-size: 1.125rem;
+    font-weight: 400;
   }
 
   h1,
@@ -97,28 +103,33 @@ const titlePrefix = title ? `${title} – ` : '';
   h4,
   h5,
   h6 {
-    font-family: 'Tourney', sans-serif;
+    font-family: 'Big Shoulders Inline Text', sans-serif;
     line-height: 1.1;
     text-transform: uppercase;
     margin: 0;
     text-align: center;
-    font-weight: 400;
   }
 
   h1 {
-    font-size: 2.5rem;
+    font-size: var(--h1-font-size, 2.8rem);
+    letter-spacing: var(--letter-spacing, 0.07ch);
+    font-weight: 900;
   }
 
   h2 {
-    font-size: 2.25rem;
+    font-size: var(--h2-font-size, 2.3rem);
+    letter-spacing: var(--letter-spacing, 0.07ch);
+    font-weight: 900;
   }
 
   h3 {
-    font-size: 1.75rem;
+    font-size: 1.625rem;
+    font-weight: 700;
   }
 
   h4 {
     font-size: 1.25rem;
+    font-weight: 700;
   }
 
   p {

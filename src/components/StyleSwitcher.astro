@@ -1,0 +1,217 @@
+---
+
+---
+
+<div class="style-switcher-wrapper">
+  <input type="checkbox" id="style-switcher-toggle" />
+  <form id="style-switcher">
+    <!--<div>
+      <label for="font-style">Hl - Font Style</label>
+      <select id="font-style">
+        <option value="Big Shoulders Inline Text">Big Shoulders Inline Text</option>
+        <option value="Alumni Sans Inline One">Alumni Sans Inline One</option>
+        <option value="Bungee Outline">Bungee Outline</option>
+        <option value="Open Sans">Open Sans</option>
+        <option value="Londrina Outline">Londrina Outline</option>
+        <option value="Londrina Shadow">Londrina Shadow</option>
+        <option value="Tourney">Tourney</option>
+        <option value="sans-serif">sans-serif</option>
+      </select>
+    </div>
+    <div>
+      <label for="font-weight">Hl - Font Weight (<span>900</span>)</label>
+      <input type="range" id="font-weight" min="100" max="900" step="100" value="900" />
+    </div> -->
+    <div>
+      <label for="h1-font-size">H1 - Font Size (<span>2.8rem</span>)</label>
+      <input type="range" id="h1-font-size" min="1" max="3" step="0.1" value="2.8" />
+    </div>
+    <div>
+      <label for="h2-font-size">H2 - Font Size (<span>2.3rem</span>)</label>
+      <input type="range" id="h2-font-size" min="1" max="3" step="0.1" value="2.3" />
+    </div>
+    <div>
+      <label for="letter-spacing">Hl - Letter Spacing (<span>0.07ch</span>)</label>
+      <input type="range" id="letter-spacing" min="-0.2" max="0.2" step="0.01" value="0.07" />
+    </div>
+    <div>
+      <label for="line-break">H1 - Line Break</label>
+      <select id="line-break">
+        <option value={`After "FM" and "Veranstaltungs"`}>After "FM" and "Veranstaltungs"</option>
+        <option value="After Every Syllable">After Every Syllable</option>
+        <option value="After Every Syllable and Space">After Every Syllable and Space</option>
+      </select>
+    </div>
+    <div>
+      <label for="h1-margin-bottom">H1 - Margin Bottom (<span>2.1rem</span>)</label>
+      <input type="range" id="h1-margin-bottom" min="0" max="3" step="0.1" value="2.1" />
+    </div>
+    <div>
+      <label for="p-margin-bottom">P - Margin Bottom (<span>0.7rem</span>)</label>
+      <input type="range" id="p-margin-bottom" min="0" max="3" step="0.1" value="0.7" />
+    </div>
+    <div>
+      <label for="img-padding-top">Img - Padding Top (<span>8rem</span>)</label>
+      <input type="range" id="img-padding-top" min="3" max="13" step="0.5" value="8" />
+    </div>
+    <div>
+      <label for="shortened-hero-description">Shortened Hero Description</label>
+      <select id="shortened-hero-description">
+        <option value="false">false</option>
+        <option value="true">true</option>
+      </select>
+    </div>
+    <div>
+      <label for="features-height">Features Height (<span>22rem</span>)</label>
+      <input type="range" id="features-height" min="19" max="39" step="0.5" value="22" />
+    </div>
+    <div>
+      <label for="first-h2-padding-top">1st H2 - Padding Top (<span>2rem</span>)</label>
+      <input type="range" id="first-h2-padding-top" min="0" max="7" step="0.1" value="2" />
+    </div>
+  </form>
+</div>
+
+<style>
+  .style-switcher-wrapper {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    color: var(--color-white);
+    z-index: 1000;
+    max-width: 52rem;
+    width: calc(100% - 2rem);
+  }
+
+  #style-switcher {
+    background: #353535dd;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+
+  #style-switcher > * {
+    width: 16rem;
+  }
+
+  #style-switcher label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  #style-switcher select,
+  #style-switcher input {
+    display: block;
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  #style-switcher-toggle {
+    opacity: 1;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 1rem !important;
+    transform: scale(1.5);
+    z-index: 1;
+    transform: scale(1.5) translateY(9rem);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  #style-switcher-toggle ~ * {
+    transform: translateY(13.5rem);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  #style-switcher-toggle:checked {
+    transform: scale(1.5) translateY(0);
+  }
+
+  #style-switcher-toggle:checked ~ * {
+    transform: translateY(0);
+  }
+
+  @media (max-width: 884px) {
+    #style-switcher-toggle {
+      transform: scale(1.5) translateY(11.666rem);
+    }
+    #style-switcher-toggle ~ * {
+      transform: translateY(17.5rem);
+    }
+  }
+
+  @media (max-width: 547px) {
+    #style-switcher-toggle {
+      transform: scale(1.5) translateY(25.666rem);
+    }
+    #style-switcher-toggle ~ * {
+      transform: translateY(38.5rem);
+    }
+  }
+</style>
+
+<script is:inline>
+  const styleSwitcher = document.getElementById('style-switcher');
+  //  const fontStyle = document.getElementById('font-style');
+  //  const fontWeight = document.getElementById('font-weight');
+  const h1FontSize = document.getElementById('h1-font-size');
+  const h2FontSize = document.getElementById('h2-font-size');
+  const letterSpacing = document.getElementById('letter-spacing');
+  const h1MarginBottom = document.getElementById('h1-margin-bottom');
+  const pMarginBottom = document.getElementById('p-margin-bottom');
+  const lineBreak = document.getElementById('line-break');
+  const imgPaddingTop = document.getElementById('img-padding-top');
+  const shortenedHeroDescription = document.getElementById('shortened-hero-description');
+  const featuresHeight = document.getElementById('features-height');
+  const firstH2PaddingTop = document.getElementById('first-h2-padding-top');
+
+  styleSwitcher.addEventListener('input', () => {
+    //    document.documentElement.style.setProperty('--font-family', fontStyle.value);
+    //    document.documentElement.style.setProperty('--font-weight', fontWeight.value);
+    document.documentElement.style.setProperty('--h1-font-size', h1FontSize.value + 'rem');
+    document.documentElement.style.setProperty('--h2-font-size', h2FontSize.value + 'rem');
+    document.documentElement.style.setProperty('--letter-spacing', letterSpacing.value + 'ch');
+    document.documentElement.style.setProperty('--h1-margin-bottom', h1MarginBottom.value + 'rem');
+    document.documentElement.style.setProperty('--p-margin-bottom', pMarginBottom.value + 'rem');
+    document.documentElement.style.setProperty('--img-padding-top', imgPaddingTop.value + 'rem');
+    document.documentElement.style.setProperty('--features-height', featuresHeight.value + 'rem');
+    document.documentElement.style.setProperty('--first-h2-padding-top', firstH2PaddingTop.value + 'rem');
+
+    const heroH1 = document.getElementById('hero-h1');
+    switch (lineBreak.value) {
+      case 'After Every Syllable':
+        heroH1.innerHTML = 'FM&nbsp;Veran&shy;stal&shy;tungs&shy;technik';
+        break;
+      case 'After Every Syllable and Space':
+        heroH1.innerHTML = 'FM Veran&shy;stal&shy;tungs&shy;technik';
+        break;
+      case 'After "FM" and "Veranstaltungs"':
+        heroH1.innerHTML = 'FM Veranstaltungs&shy;technik';
+        break;
+    }
+
+    const heroDescription =
+      shortenedHeroDescription.value === 'true'
+        ? `<p>Willkommen bei unserem DJ- und Event-Service! Wir sind ein motiviertes Team mit über zehn Jahren Erfahrung.</p>
+    <p>Eure Zufriedenheit ist unser Ziel. Was als Hobby meines Vaters begann, wurde zu unserer Leidenschaft. Dank seiner Inspiration habe ich mich intensiv mit der Technik und Eventplanung auseinandergesetzt.</p>
+    <p>Wir nutzen die aktuellste Technik, um eure Veranstaltungen unvergesslich zu machen.</p>`
+        : `<p>Willkommen bei unserem professionellen DJ- und Event-Service! Wir sind ein kleines, hochmotiviertes Team aus zwei Personen mit über zehn Jahren Erfahrung.</p>
+    <p>Eure Zufriedenheit und Wünsche sind unser oberstes Ziel. Was einst als Hobby meines Vaters begann, hat sich zu unserer Leidenschaft entwickelt. Dank seiner Inspiration habe ich mich intensiv mit der Technik und Eventplanung auseinandergesetzt.</p>
+    <p>Wir nutzen die aktuellste Technik, um eure Veranstaltungen unvergesslich zu machen.</p>`;
+
+    document.getElementById('hero-content-container').innerHTML = `<h1 id="hero-h1">${heroH1.innerHTML}</h1>
+      ${heroDescription}`;
+
+    //    styleSwitcher.querySelectorAll('span')[0].textContent = fontWeight.value;
+    styleSwitcher.querySelectorAll('span')[0].textContent = h1FontSize.value + 'rem';
+    styleSwitcher.querySelectorAll('span')[1].textContent = h2FontSize.value + 'rem';
+    styleSwitcher.querySelectorAll('span')[2].textContent = letterSpacing.value + 'ch';
+    styleSwitcher.querySelectorAll('span')[3].textContent = h1MarginBottom.value + 'rem';
+    styleSwitcher.querySelectorAll('span')[4].textContent = pMarginBottom.value + 'rem';
+    styleSwitcher.querySelectorAll('span')[5].textContent = imgPaddingTop.value + 'rem';
+    styleSwitcher.querySelectorAll('span')[6].textContent = featuresHeight.value + 'rem';
+    styleSwitcher.querySelectorAll('span')[7].textContent = firstH2PaddingTop.value + 'rem';
+  });
+</script>
