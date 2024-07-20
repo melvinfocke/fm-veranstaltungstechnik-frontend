@@ -28,22 +28,22 @@
 
   <div class="two-horizonal-fields">
     <div>
-      <label for="location">Ort der Veranstaltung:</label>
-      <input type="text" id="location" name="location" required />
+      <label for="location" class="optional">Ort der Veranstaltung:</label>
+      <input type="text" id="location" name="location" class="optional" />
     </div>
     <div>
-      <label for="date">Datum:</label>
-      <input type="date" id="date" name="date" required />
+      <label for="date" class="optional">Datum:</label>
+      <input type="date" id="date" name="date" class="optional" />
     </div>
   </div>
   <div class="two-horizonal-fields">
     <div>
-      <label for="time_start">Uhrzeit von:</label>
-      <input type="time" id="time_start" name="time_start" required />
+      <label for="time_start" class="optional">Uhrzeit von:</label>
+      <input type="time" id="time_start" name="time_start" class="optional" />
     </div>
     <div>
-      <label for="time_end">Uhrzeit bis:</label>
-      <input type="time" id="time_end" name="time_end" required />
+      <label for="time_end" class="optional">Uhrzeit bis:</label>
+      <input type="time" id="time_end" name="time_end" class="optional" />
     </div>
   </div>
 
@@ -51,6 +51,7 @@
   <textarea id="message" name="message" rows="5" cols="50" required></textarea>
 
   <div class="submit-wrapper">
+    <span>Alle Felder sind erforderlich!</span>
     <input type="submit" value="Absenden" />
   </div>
 </form>
@@ -58,6 +59,9 @@
 <style>
   form {
     margin: 0 auto;
+    height: 41.5rem;
+    display: flex;
+    flex-direction: column;
   }
 
   label {
@@ -127,9 +131,37 @@
   .submit-wrapper {
     text-align: right;
   }
+
+  .submit-wrapper span {
+    margin-right: 1rem;
+    display: inline-block;
+    font-size: 0.875rem;
+    color: red;
+  }
+
+  textarea[name='message'] {
+    flex: 1 1 auto;
+  }
+
+  select[name='type_of_request']:has(> option[value='Anderes Anliegen']:checked) ~ div .optional {
+    display: none;
+  }
 </style>
 
 <script is:inline>
+  const modifyOptionalFields = (isRequired) => {
+    document.querySelectorAll('input.optional').forEach((element) => {
+      element.required = isRequired;
+    });
+  };
+  modifyOptionalFields(true);
+
+  document
+    .querySelector('select[name="type_of_request"]')
+    .addEventListener('change', (event) => modifyOptionalFields(event.target.value !== 'Anderes Anliegen'));
+
+  document.querySelector('.submit-wrapper span').remove();
+
   document.querySelector('form').addEventListener('submit', async (event) => {
     event.preventDefault();
 
