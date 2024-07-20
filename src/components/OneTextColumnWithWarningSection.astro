@@ -63,6 +63,9 @@ const { title, text, warningTitle, warningText, warningSource, warningAlt } = As
     padding-block: 0;
   }
 
+  .warning-column::selection {
+  }
+
   .text-column > * {
     margin-inline: var(--content-border);
   }
@@ -83,6 +86,7 @@ const { title, text, warningTitle, warningText, warningSource, warningAlt } = As
     width: calc(100% - var(--content-border) * 2 - 5rem);
     height: auto;
     padding: 12rem 2.5rem;
+    pointer-events: none;
   }
 
   .warning-column div {
