@@ -1,54 +1,26 @@
-# Astro Starter Kit: Basics
+# FM Veranstaltungstechnik Frontend
 
-```sh
-npm create astro@latest -- --template basics
-```
+Welcome to our professional DJ and event service! We are a small, highly motivated team of two with over ten years of experience.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+Your satisfaction and wishes are our top priority. What started as my father's hobby has grown into our passion. Inspired by him, I have delved deeply into event planning and technology.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+We use the latest equipment to make your events unforgettable.
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## 📦 Project Overview
 
-## 🚀 Project Structure
+This repository contains the frontend code for FM Veranstaltungstechnik. The frontend is built using [Astro](https://astro.build) for fast and lightweight development.
 
-Inside of your Astro project, you'll see the following folders and files:
+🔗 **Backend**: For the backend code, see [fm-veranstaltungstechnik-backend](https://github.com/melvinfocke/fm-veranstaltungstechnik-backend).
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## 🧑‍💻 Getting Started
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+To get started with the frontend, clone the repository and run the following commands from the root of the project in your terminal:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+| Command                   | Action                                                |
+| :------------------------ | :---------------------------------------------------- |
+| `npm install`             | Installs all project dependencies                     |
+| `npm run dev`             | Starts a local development server at `localhost:4321` |
+| `npm run build`           | Builds the production site to the `./dist/` directory |
+| `npm run preview`         | Previews the production build locally                 |
+| `npm run astro ...`       | Run additional Astro CLI commands                     |
+| `npm run astro -- --help` | Displays help for the Astro CLI                       |
