@@ -1,0 +1,545 @@
+---
+import { Image } from 'astro:assets';
+import calendarIcon from '../assets/calendar.svg';
+---
+
+<div id="date-wrapper">
+  <Image src={calendarIcon} alt="" class="optional" aria-hidden />
+  <input
+    type="date"
+    id="date"
+    name="date"
+    class="optional"
+    placeholder="TT.MM.JJJJ"
+    minlength="10"
+    maxlength="10"
+    inputmode="none"
+  />
+</div>
+
+<style is:global>
+  #date-wrapper {
+    position: relative;
+  }
+
+  #date-wrapper > img {
+    position: absolute;
+    right: 0.7rem;
+    top: 25%;
+    scale: 0.75;
+    filter: invert(1);
+    z-index: -1;
+  }
+
+  #date-wrapper > img[aria-hidden] {
+    display: none;
+  }
+
+  input#date {
+    padding: 0.625rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+    font-size: 1.125rem;
+    min-height: 2.925rem;
+    height: auto;
+    font-family: monospace;
+    width: 100%;
+    background: transparent;
+    caret-color: transparent;
+    cursor: context-menu;
+  }
+
+  #calendar span {
+    text-align: center;
+    font-size: 1.5rem;
+    padding-block: 4px;
+    margin: 0;
+    grid-area: 1 / 2 / 2 / 3;
+    z-index: 102;
+    border-top: 1px solid #484848;
+    background-color: #000;
+  }
+
+  #calendar #previous,
+  #calendar #next {
+    background-color: #2e2e2e;
+    border: none;
+    color: inherit;
+    font-size: 16px;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 0;
+    cursor: pointer;
+    z-index: 2;
+    border: 1px solid #484848;
+    border-bottom: none;
+  }
+
+  #calendar #previous {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+
+  #calendar #next {
+    grid-area: 1 / 3 / 2 / 4;
+  }
+
+  #calendar::before {
+    content: '';
+    position: absolute;
+    top: -100vh;
+    left: -100vw;
+    width: 300vw;
+    height: 300vh;
+    opacity: 0.5;
+    z-index: 1;
+  }
+
+  #calendar {
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    width: 300px;
+    display: none;
+    grid-template-columns: calc(300px / 7) 1fr calc(300px / 7);
+    position: absolute;
+    border-top: 4px solid transparent;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    box-shadow: 0 0 3rem rgba(0, 0, 0, 1);
+  }
+
+  #calendar[data-visible] {
+    display: grid;
+  }
+
+  #calendar table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+    grid-area: 2 / 1 / 3 / 4;
+    z-index: 2;
+  }
+
+  #calendar th {
+    background-color: #2e2e2e;
+    padding: 4px 0;
+    border: 1px solid #484848;
+    text-align: center;
+  }
+
+  #calendar td {
+    border: 1px solid #484848;
+    width: 50px;
+    padding: 4px 0;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  #calendar td[data-inactive] {
+    opacity: 0.3;
+  }
+
+  #calendar td[data-highlighted] {
+    outline: 5px solid #fff;
+    z-index: 10;
+  }
+
+  #calendar tr {
+    background-color: #000;
+  }
+
+  #calendar td[data-blocked] {
+    background-color: hsl(0, 55%, 40%);
+  }
+
+  #calendar tr:nth-child(even) {
+    background-color: #2e2e2e;
+  }
+
+  #calendar tr:nth-child(even) td[data-blocked] {
+    background-color: hsl(0, 55%, 50%);
+  }
+
+  @media (max-width: 660px) {
+    #calendar {
+      left: calc(-0.5rem - 150px);
+    }
+  }
+</style>
+
+<script>
+  const API_ENDPOINT = document.querySelector('html')?.getAttribute('data-api-endpoint') || '';
+
+  const calendarInput = document.querySelector('input#date');
+  if (!calendarInput) throw new Error('No input element with id "date" found');
+
+  document.querySelector('#date-wrapper > img')?.removeAttribute('aria-hidden');
+  //calendarInput.attributes.setNamedItem(document.createAttribute('readonly'));
+  const typeAttribute = document.createAttribute('type');
+  typeAttribute.value = 'text';
+  calendarInput.attributes.setNamedItem(typeAttribute);
+  calendarInput.insertAdjacentHTML(
+    'afterend',
+    `<div id="calendar">
+      <span>September 2024</span>
+      <button aria-label="Vorheriger Monat" id="previous" type="button"><</button>
+      <button aria-label="Nächster Monat" id="next" type="button">></button>
+      <table>
+        <thead>
+          <tr>
+            <th>Mo</th>
+            <th>Di</th>
+            <th>Mi</th>
+            <th>Do</th>
+            <th>Fr</th>
+            <th>Sa</th>
+            <th>So</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+          </tr>
+          <tr>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+          </tr>
+          <tr>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+          </tr>
+          <tr>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+          </tr>
+          <tr>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+          </tr>
+          <tr>
+            <td class="bl" data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td data-inactive>_</td>
+            <td class="br" data-inactive>_</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>`
+  );
+
+  const previousButton = document.querySelector('#calendar #previous') as HTMLButtonElement | null;
+  const nextButton = document.querySelector('#calendar #next') as HTMLButtonElement | null;
+  const calendar = document.querySelector('#calendar tbody');
+  const calendarContainer = document.getElementById('calendar');
+  const headline = document.querySelector('#calendar span');
+  const dateInput = document.getElementById('date') as HTMLInputElement | null;
+
+  const now = new Date();
+  let calendarMonth = now.getMonth();
+  let calendarYear = now.getFullYear();
+
+  let selectedDate: Date | null = null;
+
+  /* Fetch blocked dates from the server */
+  const blockedDates: Date[] = [];
+  async function fetchBlockedDates() {
+    try {
+      const request = await fetch(`${API_ENDPOINT}/v1/calendar/blocked-dates`);
+      const blockedDatesAsStrings: Date[] = (await request.json()) || [];
+      blockedDatesAsStrings.forEach((date) => {
+        blockedDates.push(new Date(date));
+      });
+    } catch (error) {}
+    drawCalendar();
+  }
+  fetchBlockedDates();
+
+  /* Update visuals of the calendar, eg. month and year headline, days in grid view */
+  function drawCalendar() {
+    if (!headline) throw new Error('No span element found');
+    if (!calendar) throw new Error('No tbody element found');
+
+    headline.textContent = new Date(calendarYear, calendarMonth).toLocaleString('de-DE', {
+      month: 'long',
+      year: 'numeric'
+    });
+
+    /* Calculate days in month, first and last day of month, days in previous and next month */
+    const daysInMonth = new Date(calendarYear, calendarMonth + 1, 0).getDate();
+    const firstDayOfMonth = new Date(calendarYear, calendarMonth, 1).getDay() || 7;
+    const lastDayOfMonth = new Date(calendarYear, calendarMonth + 1, 0).getDay() || 7;
+
+    const daysInPreviousMonth = new Date(calendarYear, calendarMonth, 0).getDate();
+    const lastDayOfPreviousMonth = new Date(calendarYear, calendarMonth, 0).getDay() || 7;
+
+    const firstDayOfNextMonth = new Date(calendarYear, calendarMonth + 1, 1).getDay() || 7;
+
+    /* Fill the calendar with the days of the month */
+    const rows = [];
+    for (let i = 0; i < 6; i++) {
+      const row = calendar.children[i];
+
+      for (let j = 0; j < 7; j++) {
+        row.children[j].textContent = '';
+        row.children[j].removeAttribute('data-inactive');
+        row.children[j].removeAttribute('data-blocked');
+        row.children[j].removeAttribute('data-highlighted');
+        row.children[j].removeAttribute('tabindex');
+        row.children[j].removeAttribute('aria-label');
+      }
+      rows.push(row);
+    }
+
+    /* Fill the calendar with the days of the current month */
+    for (let i = 1; i <= daysInMonth; i++) {
+      const row = Math.floor((i + firstDayOfMonth - 2) / 7);
+      const column = (i + firstDayOfMonth - 2) % 7;
+
+      rows[row].children[column].textContent = String(i);
+      if (
+        blockedDates.some(
+          (date) => date.getDate() === i && date.getMonth() === calendarMonth && date.getFullYear() === calendarYear
+        )
+      ) {
+        rows[row].children[column].setAttribute('data-blocked', '');
+        rows[row].children[column].setAttribute('aria-label', `Tag ${i} ist blockiert`);
+      } else {
+        rows[row].children[column].setAttribute('tabindex', '0');
+        rows[row].children[column].setAttribute('aria-label', `Tag ${i}`);
+      }
+    }
+
+    /* Fill the calendar with the days of the previous and next month */
+    for (let i = lastDayOfPreviousMonth; i > 0; i--) {
+      const day = daysInPreviousMonth - lastDayOfPreviousMonth + i;
+
+      if (lastDayOfPreviousMonth === 7) break;
+
+      rows[0].children[i - 1].textContent = String(day);
+      rows[0].children[i - 1].setAttribute('data-inactive', '');
+
+      if (
+        blockedDates.some(
+          (date) =>
+            date.getDate() === day &&
+            date.getMonth() === (calendarMonth === 0 ? 11 : calendarMonth - 1) &&
+            date.getFullYear() === (calendarMonth === 0 ? calendarYear - 1 : calendarYear)
+        )
+      ) {
+        rows[0].children[i - 1].setAttribute('data-blocked', '');
+      }
+    }
+
+    const rowForNextMonth = Math.floor((daysInMonth + firstDayOfMonth - (lastDayOfMonth == 6 ? 1 : 0)) / 7);
+    for (let i = firstDayOfNextMonth; i <= 14; i++) {
+      if (rowForNextMonth === 5 && i > 7) break;
+
+      const additionalRow = i > 7 ? 1 : 0;
+
+      const day = i - firstDayOfNextMonth + 1;
+      rows[rowForNextMonth + additionalRow].children[(i - 1) % 7].textContent = String(day);
+      rows[rowForNextMonth + additionalRow].children[(i - 1) % 7].setAttribute('data-inactive', '');
+
+      if (
+        blockedDates.some(
+          (date) =>
+            date.getDate() === day &&
+            date.getMonth() === (calendarMonth === 11 ? 0 : calendarMonth + 1) &&
+            date.getFullYear() === (calendarMonth === 11 ? calendarYear + 1 : calendarYear)
+        )
+      ) {
+        rows[rowForNextMonth + additionalRow].children[(i - 1) % 7].setAttribute('data-blocked', '');
+      }
+    }
+
+    /* Hightlight the selected date */
+    let calendarMonthAsIndex = calendarYear * 12 + calendarMonth;
+    let selectedDateAsIndex = (selectedDate?.getFullYear() ?? 0) * 12 + (selectedDate?.getMonth() ?? 0);
+    let day = selectedDate?.getDate();
+
+    if (calendarMonthAsIndex === selectedDateAsIndex) {
+      document.querySelectorAll('#calendar td').forEach((cell) => {
+        cell.textContent == String(day) && !cell.hasAttribute('data-inactive')
+          ? cell.setAttribute('data-highlighted', '')
+          : cell.removeAttribute('data-highlighted');
+      });
+    }
+
+    if (
+      (calendarMonthAsIndex + 1 === selectedDateAsIndex && !!day && day < 15) ||
+      (calendarMonthAsIndex - 1 === selectedDateAsIndex && !!day && day >= 15)
+    ) {
+      document.querySelectorAll('#calendar td').forEach((cell) => {
+        cell.textContent == String(day) && cell.hasAttribute('data-inactive')
+          ? cell.setAttribute('data-highlighted', '')
+          : cell.removeAttribute('data-highlighted');
+      });
+    }
+  }
+
+  /* Add event listener to each day cell */
+  document.querySelectorAll('#calendar td').forEach((cell) => {
+    cell.addEventListener('click', () => {
+      if (cell.hasAttribute('data-blocked')) return;
+
+      const day = cell.textContent;
+
+      if (cell.hasAttribute('data-inactive')) {
+        calendarMonth = Number(cell.textContent) > 15 ? calendarMonth - 1 : calendarMonth + 1;
+        if (calendarMonth === -1) {
+          calendarMonth = 11;
+          calendarYear--;
+        } else if (calendarMonth === 12) {
+          calendarMonth = 0;
+          calendarYear++;
+        }
+      }
+
+      selectedDate = new Date(calendarYear, calendarMonth, Number(day));
+
+      const dateString =
+        selectedDate?.getDate().toString().padStart(2, '0') +
+        '.' +
+        (selectedDate?.getMonth() + 1).toString().padStart(2, '0') +
+        '.' +
+        selectedDate?.getFullYear();
+
+      if (!dateInput) throw new Error('No input element found');
+
+      dateInput.value = dateString;
+
+      setTimeout(() => calendarContainer?.attributes.removeNamedItem('data-visible'), 200);
+
+      drawCalendar();
+    });
+
+    cell.addEventListener('keydown', (event) => {
+      if ((event as KeyboardEvent).key === 'Enter') (cell as HTMLElement).click();
+    });
+  });
+
+  /* Add event listener to dateInput */
+  if (!dateInput) throw new Error('No input element found');
+  dateInput.addEventListener('input', (event) => {
+    const target = event.target as HTMLInputElement | null;
+    if (!target) return;
+
+    target.value = selectedDate?.toLocaleString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' }) ?? '';
+
+    const dateString = target.value;
+    const hasDateFormat = new RegExp(/^\d{2}\.\d{2}\.\d{4}$/).test(dateString);
+    const dateComponents = dateString.split('.');
+    const date =
+      hasDateFormat && Number(dateComponents[1]) >= 1 && Number(dateComponents[1]) <= 12
+        ? new Date(Number(dateComponents[2]), Number(dateComponents[1]) - 1, Number(dateComponents[0]))
+        : 'Invalid Date';
+
+    if (
+      date == 'Invalid Date' ||
+      dateString !== date.toLocaleString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })
+    ) {
+      selectedDate = null;
+      dateInput.setCustomValidity('Bitte geben Sie ein gültiges Datum ein');
+      drawCalendar();
+      return;
+    }
+
+    dateInput.setCustomValidity('');
+    selectedDate = date;
+    calendarYear = selectedDate.getFullYear();
+    calendarMonth = selectedDate.getMonth();
+    drawCalendar();
+  });
+
+  dateInput.addEventListener('click', (event) => {
+    if (!calendarContainer) throw new Error('No div element found');
+
+    event?.preventDefault();
+
+    calendarContainer.getAttribute('data-visible') != null
+      ? calendarContainer.attributes.removeNamedItem('data-visible')
+      : calendarContainer.attributes.setNamedItem(document.createAttribute('data-visible'));
+  });
+
+  dateInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      dateInput.click();
+    }
+    if (event.key === ' ') {
+      event.preventDefault();
+      calendarContainer?.attributes.setNamedItem(document.createAttribute('data-visible'));
+    }
+    if (event.key === 'Backspace' || event.key === 'Delete') {
+      selectedDate = null;
+      dateInput.value = '';
+      drawCalendar();
+    }
+  });
+
+  /* Add event listener to close calendar when pressing escape */
+  document.onkeydown = (event) => {
+    if (event.key === 'Escape' && calendarContainer?.getAttribute('data-visible') != null) {
+      calendarContainer.attributes.removeNamedItem('data-visible');
+    }
+  };
+
+  /* Add event listener to close calendar when clicking outside */
+  if (!calendarContainer) throw new Error('No div element found');
+  calendarContainer.addEventListener('click', (event) => {
+    if (event.target === calendarContainer) calendarContainer.attributes.removeNamedItem('data-visible');
+  });
+
+  /* Add event listener to previous and next button */
+  if (!previousButton) throw new Error('No button element with id "previous" found');
+  previousButton.addEventListener('click', () => {
+    const isFirstMonthOfYear = calendarMonth === 0;
+    calendarYear = isFirstMonthOfYear ? calendarYear - 1 : calendarYear;
+    calendarMonth = isFirstMonthOfYear ? 11 : calendarMonth - 1;
+    drawCalendar();
+  });
+
+  if (!nextButton) throw new Error('No button element with id "next" found');
+  nextButton.addEventListener('click', () => {
+    const isLastMonthOfYear = calendarMonth === 11;
+    calendarYear = isLastMonthOfYear ? calendarYear + 1 : calendarYear;
+    calendarMonth = isLastMonthOfYear ? 0 : calendarMonth + 1;
+    drawCalendar();
+  });
+
+  /* Initialize calendar */
+  drawCalendar();
+</script>

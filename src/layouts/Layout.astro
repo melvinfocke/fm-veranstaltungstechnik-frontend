@@ -5,7 +5,7 @@ import '@fontsource/open-sans/700.css';
 import '@fontsource/big-shoulders-inline-text/700.css';
 import '@fontsource/big-shoulders-inline-text/900.css';
 
-import { site, showStyleSwitcher } from '../env';
+import { site, showStyleSwitcher, apiEndpoint } from '../env';
 
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -23,7 +23,7 @@ const titlePrefix = title ? `${title} – ` : '';
 ---
 
 <!doctype html>
-<html lang="de">
+<html lang="de" data-api-endpoint={apiEndpoint}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />

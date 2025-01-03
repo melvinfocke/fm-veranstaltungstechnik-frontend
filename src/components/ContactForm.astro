@@ -1,8 +1,9 @@
 ---
-
+import DatePicker from './DatePicker.astro';
+import { apiEndpoint } from '../env';
 ---
 
-<form method="post" action="https://api.fm-veranstaltungstechnik.de/v1/contact-form/submit">
+<form method="post" action={`${apiEndpoint}/v1/contact-form/submit`}>
   <div class="two-horizonal-fields">
     <div>
       <label for="first_name">Vorname:</label>
@@ -33,7 +34,7 @@
     </div>
     <div>
       <label for="date" class="optional">Datum:</label>
-      <input type="date" id="date" name="date" class="optional" />
+      <DatePicker id="date" name="date" class="optional" />
     </div>
   </div>
   <div class="two-horizonal-fields">
@@ -148,27 +149,36 @@
   }
 </style>
 
-<script is:inline>
-  const modifyOptionalFields = (isRequired) => {
+<style is:global>
+  select[name='type_of_request']:has(> option[value='Anderes Anliegen']:checked) ~ div .optional {
+    display: none;
+  }
+</style>
+
+<script>
+  const API_ENDPOINT = document.querySelector('html')?.getAttribute('data-api-endpoint') || '';
+
+  const modifyOptionalFields = (isRequired: boolean) => {
     document.querySelectorAll('input.optional').forEach((element) => {
-      element.required = isRequired;
+      (element as HTMLInputElement).required = isRequired;
     });
   };
   modifyOptionalFields(true);
 
-  document
-    .querySelector('select[name="type_of_request"]')
-    .addEventListener('change', (event) => modifyOptionalFields(event.target.value !== 'Anderes Anliegen'));
+  document.querySelector('select[name="type_of_request"]')?.addEventListener('change', (event) => {
+    modifyOptionalFields((event.target as HTMLSelectElement).value !== 'Anderes Anliegen');
+  });
 
-  document.querySelector('.submit-wrapper span').remove();
+  document.querySelector('.submit-wrapper span')?.remove();
 
-  document.querySelector('form').addEventListener('submit', async (event) => {
+  document.querySelector('form')?.addEventListener('submit', async (event) => {
     event.preventDefault();
+    const target = event.target as HTMLFormElement;
 
-    const formData = new FormData(event.target);
+    const formData = new FormData(target);
     const data = Object.fromEntries(formData);
 
-    const response = await fetch('https://api.fm-veranstaltungstechnik.de/v1/contact-form/submit', {
+    const response = await fetch(`${API_ENDPOINT}/v1/contact-form/submit`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -178,7 +188,7 @@
 
     if (response.ok) {
       alert('Formular wurde erfolgreich abgesendet. Wir melden uns in Kürze bei dir.');
-      event.target.reset();
+      target.reset();
     } else if (response.status === 429) {
       alert('Du hast innerhalb kurzer Zeit zu viele Anfragen gesendet. Bitte versuche es später erneut.');
     } else {
