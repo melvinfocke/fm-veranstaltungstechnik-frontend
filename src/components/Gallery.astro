@@ -2,21 +2,26 @@
 import type { ImageMetadata } from 'astro';
 
 import { Picture } from 'astro:assets';
+import { EXPERIMENTAL_enableLandscapeGallery } from '../env';
 
 interface Props {
-  photos: { src: ImageMetadata; alt: string }[];
+  photos: ({ src: ImageMetadata; alt: string } | { src: string; alt?: null })[];
 }
 
 const { photos } = Astro.props;
 ---
 
-<section id="galerie">
+<section id="galerie" data-view={EXPERIMENTAL_enableLandscapeGallery ? 'landscape' : 'portrait'}>
   <h2>Galerie</h2>
   <div class="content-wrapper">
     {
       photos.map((photo) => (
         <div class="image-wrapper">
-          <Picture src={photo.src} alt={photo.alt} widths={[520, 780, 1040, 1300]} />
+          {photo.alt ? (
+            <Picture src={photo.src} alt={photo.alt} widths={[520, 780, 1040, 1300]} />
+          ) : (
+            <video src={String(photo.src)} controls />
+          )}
         </div>
       ))
     }
@@ -54,7 +59,7 @@ const { photos } = Astro.props;
     font-size: 0.75em;
   }
 
-  .image-wrapper {
+  section .image-wrapper {
     position: relative;
     width: 15.375rem;
     height: 22rem;
@@ -63,7 +68,17 @@ const { photos } = Astro.props;
     outline: 1px solid var(--color-gray-700);
   }
 
-  img {
+  section[data-view='landscape'] .image-wrapper {
+    position: relative;
+    overflow: hidden;
+    outline: 1px solid var(--color-gray-700);
+
+    aspect-ratio: 3 / 2;
+    width: calc(50% - 0.25rem);
+  }
+
+  section img,
+  section video {
     display: block;
     width: 100%;
     height: 100%;
@@ -71,25 +86,72 @@ const { photos } = Astro.props;
     border-radius: 1rem;
   }
 
+  section[data-view='landscape'] img,
+  section[data-view='landscape'] video {
+    border-radius: 0;
+  }
+
+  section[data-view='landscape'] .image-wrapper:nth-of-type(1),
+  section[data-view='landscape'] .image-wrapper:nth-of-type(1) img {
+    border-radius: 1rem 0 0 0;
+  }
+
+  section[data-view='landscape'] .image-wrapper:nth-of-type(2),
+  section[data-view='landscape'] .image-wrapper:nth-of-type(2) img {
+    border-radius: 0 1rem 0 0;
+  }
+  section[data-view='landscape'] .image-wrapper:nth-last-of-type(2),
+  section[data-view='landscape'] .image-wrapper:nth-last-of-type(2) img {
+    border-radius: 0 0 0 1rem;
+  }
+
+  section[data-view='landscape'] .image-wrapper:nth-last-of-type(1),
+  section[data-view='landscape'] .image-wrapper:nth-last-of-type(1) img {
+    border-radius: 0 0 1rem 0;
+  }
+
   @media screen and (max-width: 565px) {
-    .image-wrapper {
+    section .image-wrapper {
       max-width: calc(100vw - 2 * var(--content-border));
       width: 100%;
       height: calc((100vw - 2 * var(--content-border)) / 1.5);
     }
 
-    .image-wrapper,
-    img {
+    section .image-wrapper,
+    section img {
       border-radius: 0;
     }
 
-    .image-wrapper:first-of-type,
-    .image-wrapper:first-of-type img {
+    section .image-wrapper:first-of-type,
+    section .image-wrapper:first-of-type img {
       border-radius: 1rem 1rem 0 0;
     }
 
-    .image-wrapper:last-of-type,
-    .image-wrapper:last-of-type img {
+    section .image-wrapper:last-of-type,
+    section .image-wrapper:last-of-type img {
+      border-radius: 0 0 1rem 1rem;
+    }
+  }
+
+  @media screen and (max-width: 665px) {
+    section[data-view='landscape'] .image-wrapper {
+      max-width: calc(100vw - 2 * var(--content-border));
+      width: 100%;
+      height: calc((100vw - 2 * var(--content-border)) / 1.5);
+    }
+
+    section[data-view='landscape'] .image-wrapper,
+    section[data-view='landscape'] img {
+      border-radius: 0;
+    }
+
+    section[data-view='landscape'] .image-wrapper:first-of-type,
+    section[data-view='landscape'] .image-wrapper:first-of-type img {
+      border-radius: 1rem 1rem 0 0;
+    }
+
+    section[data-view='landscape'] .image-wrapper:last-of-type,
+    section[data-view='landscape'] .image-wrapper:last-of-type img {
       border-radius: 0 0 1rem 1rem;
     }
   }

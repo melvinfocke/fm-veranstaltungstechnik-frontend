@@ -8,3 +8,4 @@ export const instagramLink = 'https://www.instagram.com/fm_veranstaltungstechnik
 export const site = 'https://www.fm-veranstaltungstechnik.de';
 export const apiEndpoint = 'https://api.fm-veranstaltungstechnik.de';
 export const showStyleSwitcher = false;
+export const EXPERIMENTAL_enableLandscapeGallery = false;
