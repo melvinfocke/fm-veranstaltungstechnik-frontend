@@ -6,6 +6,9 @@ import { site } from './src/env';
 
 // https://astro.build/config
 export default defineConfig({
+  server: {
+    allowedHosts: 'pc-melvin.tre.f3e.network'
+  },
   site: site,
   integrations: [
     sitemap({
